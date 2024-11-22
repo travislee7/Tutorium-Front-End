@@ -1,0 +1,23 @@
+/* src/styles/LandingPage.css */
+.LandingPage-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.LandingPage-header-content {
+    display: flex;
+    align-items: center;
+}
+
+.LandingPage-logo {
+    height: 50px;
+    margin-right: 15px;
+}
+
+.LandingPage-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+}

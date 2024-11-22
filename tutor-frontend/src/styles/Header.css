@@ -1,0 +1,27 @@
+/* src/styles/Header.css */
+.Header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    /* Optional: A light background color */
+}
+
+.Header-content {
+    display: flex;
+    align-items: center;
+}
+
+.Header-logo {
+    height: 50px;
+    /* Adjust size as needed */
+    margin-right: 15px;
+}
+
+.Header-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    /* Use your brand color here */
+    margin: 0;
+}

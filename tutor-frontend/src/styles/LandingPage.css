@@ -1,4 +1,10 @@
 /* src/styles/LandingPage.css */
+.LandingPage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;  /* Ensure it takes full viewport height */
+}
+
 .LandingPage-header {
     display: flex;
     align-items: center;
@@ -6,7 +12,17 @@
     background-color: #f9f9f9;
 }
 
-.LandingPage-header-content {
+.LandingPage-footer {
+    background-color: #333;
+    color: white;
+    display: flex;
+    text-align: center;
+    position: relative;
+    align-items: center;
+    bottom: 0%;
+}
+
+.LandingPage-header-content, .LandingPage-footer {
     display: flex;
     align-items: center;
 }
@@ -36,6 +52,7 @@
     flex-direction: column;
     gap: 20px; /* Space between the dropdowns */
     width: 200px; /* Set a fixed width for both dropdowns */
+    flex-grow: 1;
 }
 
 /* Styling for each dropdown container */

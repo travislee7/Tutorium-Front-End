@@ -1,27 +1,88 @@
 /* src/styles/Header.css */
 .Header {
     display: flex;
+    justify-content: space-between; /* Push buttons to the right */
     align-items: center;
     padding: 20px;
-    background-color: #f9f9f9;
-    /* Optional: A light background color */
+    background-color: #99f7e8;
 }
 
+/* Logo and Title Section */
 .Header-content {
     display: flex;
     align-items: center;
 }
 
 .Header-logo {
-    height: 50px;
-    /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
     margin-right: 15px;
 }
 
 .Header-title {
     font-size: 2rem;
     font-weight: bold;
-    color: #333;
-    /* Use your brand color here */
+    color: #333; /* Use your brand color */
     margin: 0;
 }
+
+/* Buttons Container */
+.Header-buttons {
+    display: flex; /* Aligns buttons */
+    gap: 0; /* Removes space between buttons */
+    justify-content: flex-end; 
+}
+
+/* Sign In Button Styling */
+.Header-button--signin {
+    padding: 5px 15px; /* Adjust padding for text */
+    font-size: 0.75rem; 
+    border: 1px solid #ccc; 
+    border-radius: 1px; 
+    background-color: #f0f0f0; 
+    color: #333; 
+    cursor: pointer; 
+    text-align: center; 
+    white-space: nowrap; /* Prevents wrapping */
+    width: auto; /* adjusts width */
+    transition: all 0.3s ease; 
+    margin: 0; 
+}
+
+/* Hover Effect for Sign In */
+.Header-button--signin:hover {
+    background-color: #ddd; 
+    border-color: #bbb; 
+}
+
+/* Sign Up Button Styling */
+.Header-button--signup {
+    padding: 5px 15px; 
+    font-size: 0.75rem; 
+    border: 1px solid #ccc; 
+    border-radius: 1px; 
+    background-color: #f0f0f0; 
+    color: #333; 
+    cursor: pointer; 
+    text-align: center; /* Centers text */
+    white-space: nowrap; /* Prevent wrapping */
+    width: auto; 
+    transition: all 0.3s ease; 
+    margin: 0; /* Remove any extra spacing */
+}
+
+/* Hover Effect for Sign Up */
+.Header-button--signup:hover {
+    background-color: #ddd; 
+    border-color: #bbb; 
+}
+
+/* Styles for Sign In */
+.Header-button--signin {
+    border-right: none; 
+}
+
+/* Styles for Sign Up */
+.Header-button--signup {
+    border-left: none; 
+}
+

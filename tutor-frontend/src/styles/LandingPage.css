@@ -31,7 +31,7 @@
 }
 
 /* Dropdown container styling */
-.dropdown-container {
+.dropdown-container, .submitbutton {
     display: flex;
     flex-direction: column;
     gap: 20px; /* Space between the dropdowns */
@@ -39,8 +39,9 @@
 }
 
 /* Styling for each dropdown container */
-.subjectdropdown, .locationdropdown {
+.subject-select, .location-select {
     width: 100%;
+    margin-left: 500px;
 }
 
 /* Button styling for dropdowns */
@@ -51,39 +52,16 @@ button {
     margin-left: 500px;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
-    text-align: left;
+    text-align: center;
     cursor: pointer;
     font-size: 16px;
 }
 
-/* Dropdown content styling */
-.subjectdropdown-content, .locationdropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    margin-left: 500px;
-    min-width: 200px; /* Ensure dropdowns are the same width */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    list-style-type: none;
-    padding: 0;
-}
-
-/* When dropdown is open, show the menu */
-.show {
-    display: block;
-}
-
-/* Styling for dropdown items */
-.subjectdropdown-content a, .locationdropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
-}
-
 /* Hover effect for items */
-.subjectdropdown-content a:hover, .locationdropdown-content a:hover {
+.subject-select a:hover, .location-select a:hover, .submitbutton a:hover {
     background-color: #ddd;
+}
+
+.submitbutton {
+    margin-top: 50px;
 }

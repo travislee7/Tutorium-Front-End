@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage'; // Import the LandingPage compone
 import Signup from './pages/SignupPage'; // Import the Signup component
 import Signin from './pages/SigninPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Footer from './components/footer';
 
 //<LandingPage />
 
@@ -18,6 +19,8 @@ function App() {
           <Route path="/signin" element={<Signin />}/>
         </Routes>
       </Router>
+    <Footer>
+    </Footer>
 
     </div>
 

@@ -2,6 +2,7 @@
 import React from 'react';
 import Header from '../components/header.js'; // Import the reusable Header component
 import '../styles/LandingPage.css'; // Optional: Create a separate file for styling
+import Footer from '../components/footer.js';
 
 function LandingPage() {
   return (
@@ -33,6 +34,7 @@ function LandingPage() {
         <div className="submitbutton">
             <button className='submit'>Submit</button>
         </div>
+        <Footer />  
     </div>
   );
 }

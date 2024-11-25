@@ -7,7 +7,9 @@ function Header() {
     return (
         <header className="Header">
             <div className="Header-content">
-                <img src={logo} className="Header-logo" alt="Tutorium Logo" />
+                <a href="LandingPage.js">
+                    <img src={logo} className="Header-logo" alt="Tutorium Logo" /> 
+                </a>
                 <h1 className="Header-title">Tutorium</h1>
             </div>
         </header>

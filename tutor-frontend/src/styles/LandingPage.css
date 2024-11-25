@@ -21,3 +21,69 @@
     font-weight: bold;
     color: #333;
 }
+
+/* Centering container for dropdowns */
+.dropdown-center {
+    display: flex;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    height: 100vh; /* Full height of the viewport */
+}
+
+/* Dropdown container styling */
+.dropdown-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between the dropdowns */
+    width: 200px; /* Set a fixed width for both dropdowns */
+}
+
+/* Styling for each dropdown container */
+.subjectdropdown, .locationdropdown {
+    width: 100%;
+}
+
+/* Button styling for dropdowns */
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 50px;
+    margin-left: 500px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Dropdown content styling */
+.subjectdropdown-content, .locationdropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    margin-left: 500px;
+    min-width: 200px; /* Ensure dropdowns are the same width */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    list-style-type: none;
+    padding: 0;
+}
+
+/* When dropdown is open, show the menu */
+.show {
+    display: block;
+}
+
+/* Styling for dropdown items */
+.subjectdropdown-content a, .locationdropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+
+/* Hover effect for items */
+.subjectdropdown-content a:hover, .locationdropdown-content a:hover {
+    background-color: #ddd;
+}

@@ -10,6 +10,8 @@ function Header() {
 
     // Check if the current route is "/signup"
     const isSignupPage = location.pathname === '/signup';
+    //Check if the current route is "/signin"
+    const isSigninPage = location.pathname === '/signin';
 
     return (
         <header className="Header">
@@ -24,9 +26,14 @@ function Header() {
                 <h1 className="Header-title">Tutorium</h1>
             </div>
             {/* Conditionally render the sign up and sign in buttons if not on the Signup page */}
-            {!isSignupPage && (
+            {!isSignupPage && !isSigninPage && (
                 <div className="Header-buttons">
-                    <button className="Header-button--signin">Sign In</button>
+                    <button 
+                        className="Header-button--signin"
+                        onClick={() => navigate('/signin')}
+                    >
+                        Sign In
+                    </button>
                     <button
                         className="Header-button--signup"
                         onClick={() => navigate('/signup')}

@@ -5,9 +5,7 @@
     align-items: center;
     justify-content: center; 
     min-height: 100vh; /* Full viewport height */
-    padding: 20px; 
     background: linear-gradient(to top, #b5f7f3, #d5f7f5, #fcfcfc); /* Ombre background */
-    font-family: Arial, sans-serif; /* Consistent font */
 }
 
 /* Full-width cyan header background */
@@ -17,7 +15,6 @@
     display: flex;
     align-items: center; /* Center header content vertically */
     justify-content: space-between; /* Space out header content */
-    padding: 10px 20px; 
     box-sizing: border-box;
 }
 

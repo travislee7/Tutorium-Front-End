@@ -30,6 +30,14 @@ function LandingPage() {
                     <option value="4">Renton</option>
                 </select>
             </div>
+            {/* Language Select */}
+            <div className="subject-select">
+                <select>
+                    <option value="0">Select a language</option>
+                    <option value="1">English</option>
+                    <option value="2">Spanish</option>
+                </select>
+            </div>
         </div>
         <div className="submitbutton">
             <button className='submit'>Submit</button>

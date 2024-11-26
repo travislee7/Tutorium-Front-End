@@ -50,7 +50,7 @@
 .dropdown-container, .submitbutton {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Space between the dropdowns */
+    gap: 30px; /* Space between the dropdowns */
     width: 200px; /* Set a fixed width for both dropdowns */
     flex-grow: 1;
 }

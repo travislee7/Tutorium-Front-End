@@ -31,7 +31,7 @@ function LandingPage() {
                 </select>
             </div>
             {/* Language Select */}
-            <div className="subject-select">
+            <div className="language-select">
                 <select>
                     <option value="0">Select a language</option>
                     <option value="1">English</option>

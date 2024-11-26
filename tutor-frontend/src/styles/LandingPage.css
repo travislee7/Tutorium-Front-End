@@ -50,15 +50,18 @@
 .dropdown-container, .submitbutton {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 30px; /* Space between the dropdowns */
     width: 200px; /* Set a fixed width for both dropdowns */
     flex-grow: 1;
 }
 
 /* Styling for each dropdown container */
-.subject-select, .location-select {
-    width: 100%;
-    margin-left: 500px;
+.subject-select, .location-select, .language-select,.subject-select select, .location-select select, .language-select select {
+    width: 100%; /* Keep it responsive */
+    height: 50px; /* Increase height */
+    font-size: 18px; /* Increase font size */
+    margin-left: 265px; /* Keep the left margin */
 }
 
 /* Button styling for dropdowns */
@@ -66,7 +69,7 @@ button {
     width: 100%;
     padding: 10px;
     margin-top: 50px;
-    margin-left: 500px;
+    margin-left: 530px;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     text-align: center;

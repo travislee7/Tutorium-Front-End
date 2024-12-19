@@ -1,17 +1,32 @@
 // src/components/Header.js
-import React from 'react';
-import logo from '../assets/logo.png'; // Import your logo
-import '../styles/Header.css'; // Import CSS for the header
+import React, { useState } from 'react';
+import logo from '../assets/logo.png';
+import '../styles/Header.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function Header() {
     const navigate = useNavigate();
-    const location = useLocation(); // Get the current route
+    const location = useLocation();
 
-    // Check if the current route is "/signup"
-    const isSignupPage = location.pathname === '/signup';
-    //Check if the current route is "/signin"
-    const isSigninPage = location.pathname === '/signin';
+    // Get user info from localStorage
+    const firstName = localStorage.getItem('firstName');
+    const lastName = localStorage.getItem('lastName');
+    const isLoggedIn = firstName && lastName;
+
+    // State for Logout Toggle
+    const [showMenu, setShowMenu] = useState(false);
+
+    // Toggle Menu Visibility
+    const handleUserIconClick = () => {
+        setShowMenu((prev) => !prev);
+    };
+
+    // Handle Logout
+    const handleLogout = () => {
+        localStorage.clear();
+        setShowMenu(false);
+        navigate('/');
+    };
 
     return (
         <header className="Header">
@@ -21,27 +36,50 @@ function Header() {
                     className="Header-logo"
                     alt="Tutorium Logo"
                     onClick={() => navigate('/')}
-                    style={{ cursor: 'pointer' }} // Add a pointer cursor to indicate clickability
+                    style={{ cursor: 'pointer' }}
                 />
                 <h1 className="Header-title">Tutorium</h1>
             </div>
-            {/* Conditionally render the sign up and sign in buttons if not on the Signup page */}
-            {!isSignupPage && !isSigninPage && (
-                <div className="Header-buttons">
-                    <button 
-                        className="Header-button--signin"
-                        onClick={() => navigate('/signin')}
-                    >
-                        Sign In
-                    </button>
-                    <button
-                        className="Header-button--signup"
-                        onClick={() => navigate('/signup')}
-                    >
-                        Sign Up
-                    </button>
-                </div>
-            )}
+
+            <div className="Header-actions">
+                {isLoggedIn ? (
+                    <div className="User-info">
+                        <div
+                            className="User-icon"
+                            onClick={handleUserIconClick}
+                        >
+                            {firstName[0].toUpperCase()}{lastName[0].toUpperCase()}
+                        </div>
+
+                        {/* Dropdown Menu */}
+                        {showMenu && (
+                            <ul className="Dropdown-menu">
+                                <li
+                                    className="Dropdown-item"
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </li>
+                            </ul>
+                        )}
+                    </div>
+                ) : (
+                    <div className="Header-buttons">
+                        <button
+                            className="Header-button--signin"
+                            onClick={() => navigate('/signin')}
+                        >
+                            Sign In
+                        </button>
+                        <button
+                            className="Header-button--signup"
+                            onClick={() => navigate('/signup')}
+                        >
+                            Sign Up
+                        </button>
+                    </div>
+                )}
+            </div>
         </header>
     );
 }

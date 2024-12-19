@@ -1,140 +1,84 @@
-/* Style for the main container */
+/* src/styles/SignupPage.css */
+
+/* Full-Width Header Matching LandingPage */
 .signup-page {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center; 
-    min-height: 100vh; /* Full viewport height */
-    background: linear-gradient(to top, #b5f7f3, #d5f7f5, #fcfcfc); /* Ombre background */
+    min-height: 100vh;
+    background: linear-gradient(to top, #b5f7f3, #d5f7f5, #fcfcfc);
+    /* Ombre background */
 }
 
-/* Full-width cyan header background */
-.header-container {
-    width: 100%; 
-    background-color: #99f7e8; 
-    display: flex;
-    align-items: center; /* Center header content vertically */
-    justify-content: space-between; /* Space out header content */
-    box-sizing: border-box;
-}
-
-/* Header logo alignment */
-.header-container img {
-    height: 50px; /* Adjust logo size */
-}
-
-/* Header title styling */
-.header-container h1 {
-    margin: 0;
-    font-size: 2rem;
-    color: #333; 
-}
-
-/* Header buttons (Sign In, Sign Up) */
-.header-container .header-buttons {
-    display: flex;
-    gap: 10px; 
-}
-
-.header-container .header-button {
-    padding: 5px 15px; /* Button padding */
-    font-size: 0.9rem;
-    background-color: #fff; /* White background */
-    color: #333; /* Dark text */
-    border: 1px solid #ccc; /* Light grey border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer;
+/* Center the Form Container */
+.form-container {
     text-align: center;
-    transition: background-color 0.3s ease;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.header-container .header-button:hover {
-    background-color: #ddd; /* Slightly darker on hover */
+/* Signup Form Container */
+#signup-form {
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
 }
-
 
 /* Labels */
 #signup-form label {
     font-weight: bold;
     margin-bottom: 5px;
-    color: #555; 
-    text-align: left; /* Align labels */
-    width: 100%; 
+    color: hsl(0, 0%, 33%);
+    align-self: flex-start;
 }
 
 /* Input Fields */
 #signup-form input[type="text"],
 #signup-form input[type="email"],
 #signup-form input[type="password"] {
-    width: 100%; /* Full width within the form container */
+    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
-    box-sizing: border-box; /* Includes padding in the width */
-    margin-bottom: 15px; /* Add spacing between fields */
+    box-sizing: border-box;
 }
 
-/* Form container */
-#signup-form {
-    width: 100%; /* Full width of the form */
-    max-width: 400px; /* Limit form width */
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    display: flex;
-    flex-direction: column; /* Stack form elements vertically */
-    gap: 15px; 
-    align-items: center; /* Center all form elements */
-    justify-content: center; /* Vertically align elements */
-}
-
-/* Labels */
-#signup-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: hsl(0, 0%, 33%); /* Soft gray for labels */
-    align-self: flex-start; /* Align labels to the left */
-}
-
-/* Input Fields */
-#signup-form input[type="text"],
-#signup-form input[type="email"],
-#signup-form input[type="password"] {
-    width: 100%; /* Input fields take full width of the form */
-    padding: 10px;
-    border: 1px solid #ccc; /* Light gray border */
-    border-radius: 4px; /* Rounded corners */
-    font-size: 14px; /* Consistent font size */
-    box-sizing: border-box; /* Include padding in width calculation */
-}
-
-/* Button */
+/* Signup Button */
 #signup-form button {
-    width: auto; /* Button adjusts to content */
-    padding: 12px 130px; /* Add padding around text */
-    background-color: #007BFF; 
-    color: white; 
-    border: none; 
-    border-radius: 4px; 
-    font-size: 16px; /* Font size */
-    cursor: pointer; 
-    transition: background-color 0.3s ease, transform 0.2s ease; 
-    text-align: center; /* Center-align text inside the button */
-    margin: 40px auto 0 auto; /* Center button horizontally and add spacing above */
-    display: block; /* Ensure margin works for centering */
+    width: auto;
+    padding: 12px 130px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    margin: 40px auto 0 auto;
+    display: block;
 }
 
 #signup-form button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3;
 }
 
 #signup-form button:active {
-    transform: scale(0.98); /* Slightly shrink on click */
+    transform: scale(0.98);
 }
 
-/* Optional: Add responsiveness for smaller screens */
+/* Mobile Responsiveness */
 @media (max-width: 500px) {
     .signup-page {
         padding: 15px;

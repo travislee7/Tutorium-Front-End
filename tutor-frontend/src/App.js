@@ -35,6 +35,7 @@ import './styles/App.css';
 import LandingPage from './pages/LandingPage';
 import Signup from './pages/SignupPage';
 import Signin from './pages/SigninPage';
+import ApplyAsTutor from './pages/ApplyAsTutor';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/apply" element={<ApplyAsTutor />}/>
         </Routes>
       </Router>
     </div>

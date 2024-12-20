@@ -117,6 +117,8 @@ function SignupPage() {
                         required
                     />
 
+                    <a href='/apply'>Apply as tutor here!</a>
+
                     <button type="submit">Sign Up</button>
                 </form>
             </div>

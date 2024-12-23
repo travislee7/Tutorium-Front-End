@@ -77,6 +77,12 @@ function Header() {
                         >
                             Sign Up
                         </button>
+                        <button
+                            className="Header-button--applytutor"
+                            onClick={() => navigate('/apply')}
+                        >
+                            Apply as a tutor
+                        </button>
                     </div>
                 )}
             </div>

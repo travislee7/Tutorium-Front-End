@@ -1,12 +1,10 @@
-// src/components/Header.js
 import React, { useState } from 'react';
 import logo from '../assets/logo.png';
 import '../styles/Header.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
     const navigate = useNavigate();
-    const location = useLocation();
 
     // Get user info from localStorage
     const firstName = localStorage.getItem('firstName');
@@ -73,15 +71,15 @@ function Header() {
                         </button>
                         <button
                             className="Header-button--signup"
-                            onClick={() => navigate('/signup')}
+                            onClick={() => navigate('/signup?userType=student')}
                         >
                             Sign Up
                         </button>
                         <button
                             className="Header-button--applytutor"
-                            onClick={() => navigate('/apply')}
+                            onClick={() => navigate('/signup?userType=tutor')}
                         >
-                            Apply as a tutor
+                            Apply as a Tutor
                         </button>
                     </div>
                 )}

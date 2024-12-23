@@ -1,6 +1,5 @@
-// src/pages/SignupPage.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/SignupPage.css';
 import Header from '../components/header.js';
 
@@ -14,8 +13,12 @@ function SignupPage() {
     });
 
     const navigate = useNavigate();
+    const location = useLocation();
 
-    // Update form state on input change
+    // Extract userType from query parameters
+    const searchParams = new URLSearchParams(location.search);
+    const userType = searchParams.get('userType') || ''; // Default to ''
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -23,7 +26,6 @@ function SignupPage() {
         });
     };
 
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -33,7 +35,7 @@ function SignupPage() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({ ...formData, userType }),
             });
 
             const data = await response.json();
@@ -42,8 +44,12 @@ function SignupPage() {
                 localStorage.setItem('firstName', formData.firstName);
                 localStorage.setItem('lastName', formData.lastName);
 
-                // Redirect to home page
-                navigate('/');
+                // Redirect based on userType
+                if (userType === 'tutor') {
+                    navigate('/apply'); // Redirect to Apply as Tutor page
+                } else {
+                    navigate('/'); // Redirect to Home page for students
+                }
             } else {
                 alert(`Error: ${data.message}`);
             }
@@ -55,8 +61,7 @@ function SignupPage() {
 
     return (
         <div className="signup-page">
-            <Header />  {/* Correct Full-Width Header */}
-
+            <Header />
             <div className="form-container">
                 <h2>Sign Up Page</h2>
                 <p>Welcome to the Sign Up page!</p>
@@ -125,6 +130,3 @@ function SignupPage() {
 }
 
 export default SignupPage;
-
-
-

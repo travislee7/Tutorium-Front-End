@@ -12,6 +12,9 @@ function SignupPage() {
         confirmPassword: '',
     });
 
+    const [errorMessage, setErrorMessage] = useState(''); // For displaying validation errors
+    const [showErrorPopup, setShowErrorPopup] = useState(false); // Controls pop-up visibility
+
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -24,10 +27,18 @@ function SignupPage() {
             ...formData,
             [e.target.name]: e.target.value,
         });
+        setErrorMessage(''); // Clear error message on input change
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validate passwords
+        if (formData.password !== formData.confirmPassword) {
+            setErrorMessage('Passwords do not match');
+            setShowErrorPopup(true); // Show error pop-up
+            return;
+        }
 
         try {
             const response = await fetch('http://127.0.0.1:8000/api/signup/', {
@@ -40,23 +51,27 @@ function SignupPage() {
 
             const data = await response.json();
             if (response.ok) {
-                // Save to localStorage
                 localStorage.setItem('firstName', formData.firstName);
                 localStorage.setItem('lastName', formData.lastName);
 
-                // Redirect based on userType
                 if (userType === 'tutor') {
-                    navigate('/apply'); // Redirect to Apply as Tutor page
+                    navigate('/apply');
                 } else {
-                    navigate('/'); // Redirect to Home page for students
+                    navigate('/');
                 }
             } else {
-                alert(`Error: ${data.message}`);
+                setErrorMessage(data.message || 'Something went wrong!');
+                setShowErrorPopup(true); // Show error pop-up
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Something went wrong!');
+            setErrorMessage('An error occurred. Please try again.');
+            setShowErrorPopup(true); // Show error pop-up
         }
+    };
+
+    const closePopup = () => {
+        setShowErrorPopup(false); // Close the pop-up
     };
 
     return (
@@ -125,6 +140,16 @@ function SignupPage() {
                     <button type="submit">Sign Up</button>
                 </form>
             </div>
+
+            {/* Error Pop-Up */}
+            {showErrorPopup && (
+                <div className="error-popup">
+                    <div className="error-popup-content">
+                        <p>{errorMessage}</p>
+                        <button onClick={closePopup}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

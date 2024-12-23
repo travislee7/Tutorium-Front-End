@@ -78,6 +78,47 @@
     transform: scale(0.98);
 }
 
+.error-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.error-popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error-popup-content p {
+    margin-bottom: 20px;
+    color: red;
+    font-weight: bold;
+}
+
+.error-popup-content button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.error-popup-content button:hover {
+    background-color: #0056b3;
+}
+
+
 /* Mobile Responsiveness */
 @media (max-width: 500px) {
     .signup-page {

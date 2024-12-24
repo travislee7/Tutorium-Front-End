@@ -64,7 +64,7 @@ function Header() {
                             )}
                         </div>
                     ) :
-                    isLoggedIn && userType === 'student' ? (
+                    isLoggedIn && userType !== 'tutor' ? (
                         <div className="User-info">
                             <button
                                 className="Header-button--applytutor"

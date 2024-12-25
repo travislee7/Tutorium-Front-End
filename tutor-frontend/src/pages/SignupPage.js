@@ -51,8 +51,10 @@ function SignupPage() {
 
             const data = await response.json();
             if (response.ok) {
+                // Store user data in localStorage
                 localStorage.setItem('firstName', formData.firstName);
                 localStorage.setItem('lastName', formData.lastName);
+                localStorage.setItem('userType', userType); // Store userType locally
 
                 if (userType === 'tutor') {
                     navigate('/apply');

@@ -27,6 +27,17 @@ function Header() {
         navigate('/');
     };
 
+    // Handle "Apply as a Tutor" Button Click
+    const handleApplyAsTutorClick = () => {
+        if (isLoggedIn && userType === 'student') {
+            // Logged in as a student, navigate to the apply page
+            navigate('/apply');
+        } else {
+            // Not logged in, navigate to the sign-up page
+            navigate('/signup?userType=tutor');
+        }
+    };
+
     return (
         <header className="Header">
             <div className="Header-content">
@@ -41,80 +52,60 @@ function Header() {
             </div>
 
             <div className="Header-actions">
-                {
-                    isLoggedIn ? (
-                        <div className="User-info">
-                            <div
-                                className="User-icon"
-                                onClick={handleUserIconClick}
-                            >
-                                {firstName[0].toUpperCase()}{lastName[0].toUpperCase()}
-                            </div>
-
-                            {/* Dropdown Menu */}
-                            {showMenu && (
-                                <ul className="Dropdown-menu">
-                                    <li
-                                        className="Dropdown-item"
-                                        onClick={handleLogout}
-                                    >
-                                        Logout
-                                    </li>
-                                </ul>
-                            )}
-                        </div>
-                    ) :
-                    isLoggedIn && userType !== 'tutor' ? (
-                        <div className="User-info">
+                {isLoggedIn ? (
+                    <div className="User-info">
+                        {/* "Apply as a Tutor" Button for Student Users */}
+                        {userType === 'student' && (
                             <button
                                 className="Header-button--applytutor"
-                                onClick={() => navigate('/signup?userType=tutor')}
+                                onClick={handleApplyAsTutorClick}
                             >
                                 Apply as a Tutor
                             </button>
-                            <div
-                                className="User-icon"
-                                onClick={handleUserIconClick}
-                            >
-                                {firstName[0].toUpperCase()}{lastName[0].toUpperCase()}
-                            </div>
+                        )}
 
-                            {/* Dropdown Menu */}
-                            {showMenu && (
-                                <ul className="Dropdown-menu">
-                                    <li
-                                        className="Dropdown-item"
-                                        onClick={handleLogout}
-                                    >
-                                        Logout
-                                    </li>
-                                </ul>
-                            )}
+                        {/* User Icon */}
+                        <div
+                            className="User-icon"
+                            onClick={handleUserIconClick}
+                        >
+                            {firstName[0].toUpperCase()}{lastName[0].toUpperCase()}
                         </div>
-                    ) :
-                    (
-                        <div className="Header-buttons">
-                            <button
-                                className="Header-button--signin"
-                                onClick={() => navigate('/signin')}
-                            >
-                                Sign In
-                            </button>
-                            <button
-                                className="Header-button--signup"
-                                onClick={() => navigate('/signup?userType=student')}
-                            >
-                                Sign Up
-                            </button>
-                            <button
-                                className="Header-button--applytutor"
-                                onClick={() => navigate('/signup?userType=tutor')}
-                            >
-                                Apply as a Tutor
-                            </button>
-                        </div>
-                    )
-                }
+
+                        {/* Dropdown Menu */}
+                        {showMenu && (
+                            <ul className="Dropdown-menu">
+                                <li
+                                    className="Dropdown-item"
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </li>
+                            </ul>
+                        )}
+                    </div>
+                ) : (
+                    <div className="Header-buttons">
+                        <button
+                            className="Header-button--signin"
+                            onClick={() => navigate('/signin')}
+                        >
+                            Sign In
+                        </button>
+                        <button
+                            className="Header-button--signup"
+                            onClick={() => navigate('/signup?userType=student')}
+                        >
+                            Sign Up
+                        </button>
+                        <button
+                            className="Header-button--applytutor"
+                            onClick={handleApplyAsTutorClick}
+                        >
+                            Apply as a Tutor
+                        </button>
+                    </div>
+                )}
             </div>
         </header>
     );

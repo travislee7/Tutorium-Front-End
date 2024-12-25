@@ -1,0 +1,124 @@
+/* src/styles/ApplyAsTutor.css */
+
+/* Full-Width Header for the ApplyAsTutor Page */
+.apply-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(to top, #e4e3fc, #d5f7f5, #fafaff); /* Ombre background */
+}
+
+/* Main Content Container */
+.apply-page h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 40px;
+    color: #9a9af5; /* Orange highlight */
+    
+}
+
+.apply-page p {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    color: #191938;
+    font-weight: bold;
+}
+
+/* Container for additional content if needed */
+.apply-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 70px;
+    margin-left: auto;  /* Push the container to the right */
+    margin-right: 80px; /* Add some space between the container and the right edge */
+    max-width: 800px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.apply-content-container p {
+    margin-top: 0; /* Eliminate unnecessary space above this text */
+    margin-bottom: 40px; /* Add a bit of space below if needed */
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #191938;
+    text-align: left;
+}
+
+/* Labels */
+.apply-content-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;  /* Adjust color as needed */
+    display: block; /* Ensure label takes up a full line */
+    margin-left: -40px; 
+}
+
+/* Style for form groups */
+.form-group {
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+/* Input Fields (Text Boxes) */
+.apply-content-container input {
+    width: 100%;  /* Make text boxes take up the full width of the container */
+    padding: 10px;
+    margin-bottom: 20px;  /* Add space between the text boxes */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 10px;
+}
+
+/* Style for the textarea */
+.form-group textarea {
+    width: 116%; /* Keep the wider width */
+    max-width: none; /* No constraints on max width */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: none;
+    margin-left: -40px; /* Shift the text box 10px to the left */
+}
+
+/* Buttons (if any) */
+.apply-page button {
+    width: auto;
+    padding: 12px 50px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    margin: 20px auto 0 auto;
+    display: block;
+}
+
+.apply-page button:hover {
+    background-color: #0056b3;
+}
+
+.apply-page button:active {
+    transform: scale(0.98);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 500px) {
+    .apply-page {
+        padding: 15px;
+    }
+
+    .apply-content-container {
+        padding: 15px;
+    }
+}
+

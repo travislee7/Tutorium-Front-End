@@ -36,6 +36,7 @@ import LandingPage from './pages/LandingPage';
 import Signup from './pages/SignupPage';
 import Signin from './pages/SigninPage';
 import ApplyAsTutor from './pages/ApplyAsTutor';
+import TutorRequestReceived from './pages/TutorRequestReceived';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/apply" element={<ApplyAsTutor />} />
+          <Route path="/tutor-request-received" element={<TutorRequestReceived />} />
         </Routes>
       </Router>
     </div>

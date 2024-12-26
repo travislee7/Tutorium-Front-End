@@ -55,6 +55,8 @@ function SignupPage() {
                 localStorage.setItem('firstName', formData.firstName);
                 localStorage.setItem('lastName', formData.lastName);
                 localStorage.setItem('userType', userType); // Store userType locally
+                localStorage.setItem('email', formData.email); // Store userType locally
+
 
                 if (userType === 'tutor') {
                     navigate('/apply');

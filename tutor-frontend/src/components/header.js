@@ -3,49 +3,48 @@ import logo from '../assets/logo.png';
 import '../styles/Header.css';
 import { useNavigate } from 'react-router-dom';
 
-function Header() {
+function Header({ hideApplyButton = false }) { // Accept `hideApplyButton` as a prop with a default value of `false`
     const navigate = useNavigate();
 
-    // Get user info from localStorage
+    // Get user information from localStorage
     const firstName = localStorage.getItem('firstName');
     const lastName = localStorage.getItem('lastName');
-    const isLoggedIn = firstName && lastName;
-    const userType = localStorage.getItem('userType');
+    const isLoggedIn = firstName && lastName; // Check if the user is logged in
+    const userType = localStorage.getItem('userType'); // Get the user type (e.g., student, tutor)
 
-    // State for Logout Toggle
+    // State to toggle dropdown menu visibility
     const [showMenu, setShowMenu] = useState(false);
 
-    // Toggle Menu Visibility
+    // Function to toggle dropdown menu
     const handleUserIconClick = () => {
         setShowMenu((prev) => !prev);
     };
 
-    // Handle Logout
+    // Function to handle user logout
     const handleLogout = () => {
-        localStorage.clear();
-        setShowMenu(false);
-        navigate('/');
+        localStorage.clear(); // Clear user data from localStorage
+        setShowMenu(false); // Hide the menu
+        navigate('/'); // Redirect to the home page
     };
 
-    // Handle "Apply as a Tutor" Button Click
+    // Function to handle "Apply as a Tutor" button click
     const handleApplyAsTutorClick = () => {
         if (isLoggedIn && userType === 'student') {
-            // Logged in as a student, navigate to the apply page
-            navigate('/apply');
+            navigate('/apply'); // If logged in as a student, navigate directly to the apply as tutor page
         } else {
-            // Not logged in, navigate to the sign-up page
-            navigate('/signup?userType=tutor');
+            navigate('/signup?userType=tutor'); // Otherwise, navigate to the general sign-up page 
         }
     };
 
     return (
         <header className="Header">
             <div className="Header-content">
+                {/* Logo */}
                 <img
                     src={logo}
                     className="Header-logo"
                     alt="Tutorium Logo"
-                    onClick={() => navigate('/')}
+                    onClick={() => navigate('/')} // Navigate to the home page when the logo is clicked
                     style={{ cursor: 'pointer' }}
                 />
                 <h1 className="Header-title">Tutorium</h1>
@@ -54,8 +53,8 @@ function Header() {
             <div className="Header-actions">
                 {isLoggedIn ? (
                     <div className="User-info">
-                        {/* "Apply as a Tutor" Button for Student Users */}
-                        {userType === 'student' && (
+                        {/* Conditionally render "Apply as a Tutor" button if `hideApplyButton` is false */}
+                        {!hideApplyButton && userType === 'student' && (
                             <button
                                 className="Header-button--applytutor"
                                 onClick={handleApplyAsTutorClick}
@@ -64,20 +63,20 @@ function Header() {
                             </button>
                         )}
 
-                        {/* User Icon */}
+                        {/* User Icon with initials */}
                         <div
                             className="User-icon"
-                            onClick={handleUserIconClick}
+                            onClick={handleUserIconClick} // Show dropdown menu on click
                         >
                             {firstName[0].toUpperCase()}{lastName[0].toUpperCase()}
                         </div>
 
-                        {/* Dropdown Menu */}
+                        {/* Dropdown menu for user actions */}
                         {showMenu && (
                             <ul className="Dropdown-menu">
                                 <li
                                     className="Dropdown-item"
-                                    onClick={handleLogout}
+                                    onClick={handleLogout} // Logout option
                                 >
                                     Logout
                                 </li>
@@ -86,6 +85,7 @@ function Header() {
                     </div>
                 ) : (
                     <div className="Header-buttons">
+                        {/* If not logged in, show Sign In and Sign Up buttons */}
                         <button
                             className="Header-button--signin"
                             onClick={() => navigate('/signin')}

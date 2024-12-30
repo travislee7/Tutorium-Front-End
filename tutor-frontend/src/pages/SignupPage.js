@@ -12,51 +12,53 @@ function SignupPage() {
         confirmPassword: '',
     });
 
-    const [errorMessage, setErrorMessage] = useState(''); // For displaying validation errors
-    const [showErrorPopup, setShowErrorPopup] = useState(false); // Controls pop-up visibility
+    const [errorMessage, setErrorMessage] = useState('');
+    const [showErrorPopup, setShowErrorPopup] = useState(false);
 
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Extract userType from query parameters
     const searchParams = new URLSearchParams(location.search);
-    const userType = searchParams.get('userType') || ''; // Default to ''
+    const userType = searchParams.get('userType') || '';
 
     const handleChange = (e) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
         });
-        setErrorMessage(''); // Clear error message on input change
+        setErrorMessage('');
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validate passwords
         if (formData.password !== formData.confirmPassword) {
             setErrorMessage('Passwords do not match');
-            setShowErrorPopup(true); // Show error pop-up
+            setShowErrorPopup(true);
             return;
         }
 
         try {
+            const payload = { ...formData, userType };
+            console.log('Payload being sent:', payload); // Debugging
+
             const response = await fetch('http://127.0.0.1:8000/api/signup/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ ...formData, userType }),
+                body: JSON.stringify(payload),
             });
 
             const data = await response.json();
+            console.log('Response from backend:', data); // Debugging
+
             if (response.ok) {
-                // Store user data in localStorage
                 localStorage.setItem('firstName', formData.firstName);
                 localStorage.setItem('lastName', formData.lastName);
-                localStorage.setItem('userType', userType); // Store userType locally
-                localStorage.setItem('email', formData.email); // Store userType locally
-
+                localStorage.setItem('userType', userType);
+                localStorage.setItem('email', formData.email);
+                localStorage.setItem('userId', data.user_id);
 
                 if (userType === 'tutor') {
                     navigate('/apply');
@@ -65,17 +67,18 @@ function SignupPage() {
                 }
             } else {
                 setErrorMessage(data.message || 'Something went wrong!');
-                setShowErrorPopup(true); // Show error pop-up
+                setShowErrorPopup(true);
             }
         } catch (error) {
             console.error('Error:', error);
             setErrorMessage('An error occurred. Please try again.');
-            setShowErrorPopup(true); // Show error pop-up
+            setShowErrorPopup(true);
         }
     };
 
+
     const closePopup = () => {
-        setShowErrorPopup(false); // Close the pop-up
+        setShowErrorPopup(false);
     };
 
     return (
@@ -145,7 +148,6 @@ function SignupPage() {
                 </form>
             </div>
 
-            {/* Error Pop-Up */}
             {showErrorPopup && (
                 <div className="error-popup">
                     <div className="error-popup-content">

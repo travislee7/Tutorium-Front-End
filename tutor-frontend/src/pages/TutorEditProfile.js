@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/TutorBuildProfile.css';
 import Header from '../components/header.js';
 
-function TutorBuildProfile() {
+function TutorEditProfile() {
     const [formData, setFormData] = useState({
         bio: '',
         subjects: [],
@@ -11,20 +11,72 @@ function TutorBuildProfile() {
         language: [],
     });
 
-    const [profilePic, setProfilePic] = useState(null);
-    const [preview, setPreview] = useState(null);
+    const [userData, setUserData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+    });
+
+    const [profilePic, setProfilePic] = useState(null); // State for new profile picture
+    const [preview, setPreview] = useState(null); // State for profile picture preview
     const [errorMessage, setErrorMessage] = useState('');
     const [showErrorPopup, setShowErrorPopup] = useState(false);
-
     const navigate = useNavigate();
+
+    // Fetch existing profile data
+    useEffect(() => {
+        const fetchProfileData = async () => {
+            const userId = localStorage.getItem('userId');
+            if (!userId) return;
+
+            try {
+                // Fetch profile data
+                const profileResponse = await fetch(`http://127.0.0.1:8000/api/tutor-profile-read/?user_id=${userId}`);
+                const profileData = await profileResponse.json();
+
+                if (profileResponse.ok) {
+                    setFormData({
+                        bio: profileData.bio || '',
+                        subjects: profileData.subjects ? profileData.subjects.split(',') : [],
+                        location: profileData.location ? profileData.location.split(',') : [],
+                        language: profileData.language ? profileData.language.split(',') : [],
+                    });
+                    if (profileData.profile_picture) {
+                        setPreview(profileData.profile_picture);
+                    }
+                }
+
+                // Fetch user data
+                const userResponse = await fetch(`http://127.0.0.1:8000/api/student-user/?user_id=${userId}`);
+                const userData = await userResponse.json();
+
+                if (userResponse.ok) {
+                    setUserData({
+                        firstName: userData.first_name || '',
+                        lastName: userData.last_name || '',
+                        email: userData.email || '',
+                    });
+                } else {
+                    setErrorMessage(userData.error || 'Failed to fetch user data.');
+                    setShowErrorPopup(true);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setErrorMessage('An error occurred while fetching data.');
+                setShowErrorPopup(true);
+            }
+        };
+
+        fetchProfileData();
+    }, []);
 
     const handleCheckboxChange = (e) => {
         const { name, value, checked } = e.target;
         setFormData((prev) => ({
             ...prev,
             [name]: checked
-                ? [...prev[name], value] // Add the value if checked
-                : prev[name].filter((item) => item !== value), // Remove the value if unchecked
+                ? [...prev[name], value]
+                : prev[name].filter((item) => item !== value),
         }));
     };
 
@@ -86,8 +138,14 @@ function TutorBuildProfile() {
         <div className="tutor-profile-page">
             <Header />
             <div className="form-container">
-                <h2>Tutor Profile</h2>
-                <p>Set up your tutor profile to connect with students!</p>
+                <h2>Edit Tutor Profile</h2>
+                <p>Update your tutor profile details below.</p>
+
+                <div className="uneditable-fields">
+                    <p><strong>First Name:</strong> {userData.firstName}</p>
+                    <p><strong>Last Name:</strong> {userData.lastName}</p>
+                    <p><strong>Email:</strong> {userData.email}</p>
+                </div>
 
                 <form id="tutor-profile-form" onSubmit={handleSubmit}>
                     <label htmlFor="profilePic">Profile Picture:</label>
@@ -158,7 +216,7 @@ function TutorBuildProfile() {
                         ))}
                     </div>
 
-                    <button type="submit">Save Profile</button>
+                    <button type="submit">Save Changes</button>
                 </form>
             </div>
 
@@ -174,4 +232,4 @@ function TutorBuildProfile() {
     );
 }
 
-export default TutorBuildProfile;
+export default TutorEditProfile;

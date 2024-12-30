@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../assets/logo.png';
 import '../styles/Header.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function Header({ hideApplyButton = false }) {
     const navigate = useNavigate();
+    const location = useLocation();
 
     // Get user information from localStorage
     const firstName = localStorage.getItem('firstName');
@@ -12,9 +13,10 @@ function Header({ hideApplyButton = false }) {
     const isLoggedIn = firstName && lastName; // Check if the user is logged in
     const userId = localStorage.getItem('userId'); // Get the userId from localStorage
 
-    // State to store the approve_status, profile_complete, and loading status
+    // State to store the approve_status, profile_complete, profile_picture, and loading status
     const [approveStatus, setApproveStatus] = useState(null);
     const [profileComplete, setProfileComplete] = useState(null);
+    const [profilePicture, setProfilePicture] = useState(null);
     const [loading, setLoading] = useState(true);
     const [showMenu, setShowMenu] = useState(false); // Manage dropdown menu visibility
 
@@ -27,13 +29,14 @@ function Header({ hideApplyButton = false }) {
                     const approveData = await approveResponse.json();
                     setApproveStatus(approveData.approve_status);
 
-                    // Fetch profile_complete
-                    const profileResponse = await fetch(`http://127.0.0.1:8000/api/tutor-profile-status/?user_id=${userId}`);
+                    // Fetch profile_complete and profile_picture
+                    const profileResponse = await fetch(`http://127.0.0.1:8000/api/tutor-profile-read/?user_id=${userId}`);
                     const profileData = await profileResponse.json();
                     setProfileComplete(profileData.profile_complete);
+                    setProfilePicture(profileData.profile_picture);
 
                     console.log('approve_status:', approveData.approve_status);
-                    console.log('profile_complete:', profileData.profile_complete);
+                    console.log('profile_data:', profileData);
                 } catch (error) {
                     console.error('Error fetching statuses:', error);
                 } finally {
@@ -47,39 +50,55 @@ function Header({ hideApplyButton = false }) {
         fetchStatuses();
     }, [userId]);
 
+    // Navigation logic for the Tutorium logo click
+    const handleLogoClick = () => {
+        const tutorPages = ['/tutor-edit-profile', '/tutor-build-profile', '/tutor-landing'];
+        if (tutorPages.includes(location.pathname)) {
+            navigate('/tutor-landing'); // Redirect to TutorLandingPage
+        } else {
+            navigate('/'); // Redirect to LandingPage
+        }
+    };
+
     // Function to handle "Fill Out Your Profile" button click
     const handleFillOutProfileClick = () => {
         navigate('/tutor-build-profile');
     };
 
-    // Function to handle "Apply as a Tutor" button click
+    // Function to handle "Edit Your Profile" button click
+    const handleEditProfileClick = () => {
+        navigate('/tutor-edit-profile');
+    };
+
+    // Updated apply as tutor navigation to redirect to TutorSignupPage
     const handleApplyAsTutorClick = () => {
         if (!isLoggedIn) {
-            // If the user is not logged in, navigate to Sign Up
-            navigate('/signup?userType=student');
+            navigate('/tutor-signup?userType=student');
         } else if (approveStatus === 'pending') {
-            // If the user is logged in and their status is pending, navigate to request received
             navigate('/tutor-request-received');
         } else {
-            // Default case: navigate to Apply as Tutor with userType=student
             navigate('/apply?userType=student');
         }
     };
 
-    // Function to navigate to Sign Up page
-    const handleSignUpClick = () => {
-        navigate('/signup?userType=student'); // Pass userType=student for "Sign Up"
-    };
-
     // Function to toggle dropdown menu
     const handleUserIconClick = () => {
-        setShowMenu((prev) => !prev); // Use the setShowMenu function to toggle the state
+        setShowMenu((prev) => !prev);
     };
 
     // Function to handle user logout
     const handleLogout = () => {
         localStorage.clear(); // Clear user data from localStorage
         navigate('/'); // Redirect to the home page
+    };
+
+    // Navigate to Switch Views
+    const handleSwitchToTutorView = () => {
+        navigate('/tutor-landing');
+    };
+
+    const handleSwitchToStudentView = () => {
+        navigate('/');
     };
 
     if (loading) {
@@ -94,7 +113,7 @@ function Header({ hideApplyButton = false }) {
                     src={logo}
                     className="Header-logo"
                     alt="Tutorium Logo"
-                    onClick={() => navigate('/')} // Navigate to the home page when the logo is clicked
+                    onClick={handleLogoClick} // Redirect based on current page
                     style={{ cursor: 'pointer' }}
                 />
                 <h1 className="Header-title">Tutorium</h1>
@@ -103,41 +122,72 @@ function Header({ hideApplyButton = false }) {
             <div className="Header-actions">
                 {isLoggedIn ? (
                     <div className="User-info">
-                        {/* Conditionally render buttons */}
-                        {!hideApplyButton && (
+                        {!hideApplyButton && location.pathname === '/tutor-landing' && (
                             <>
-                                {approveStatus === 'approved' && profileComplete === 'no' ? (
+                                {profileComplete === 'no' ? (
                                     <button
                                         className="Header-button--filloutprofile"
                                         onClick={handleFillOutProfileClick}
                                     >
                                         Fill Out Your Profile
                                     </button>
-                                ) : (
+                                ) : profileComplete === 'yes' ? (
                                     <button
-                                        className="Header-button--applytutor"
-                                        onClick={handleApplyAsTutorClick}
+                                        className="Header-button--editprofile"
+                                        onClick={handleEditProfileClick}
                                     >
-                                        Apply as a Tutor
+                                        Edit Your Profile
                                     </button>
-                                )}
+                                ) : null}
                             </>
                         )}
 
-                        {/* User Icon with initials */}
+                        {!hideApplyButton && location.pathname !== '/tutor-landing' && approveStatus !== 'approved' && (
+                            <button
+                                className="Header-button--applytutor"
+                                onClick={handleApplyAsTutorClick}
+                            >
+                                Apply as a Tutor
+                            </button>
+                        )}
+
+                        {/* User Icon with initials or profile picture */}
                         <div
                             className="User-icon"
-                            onClick={handleUserIconClick} // Show dropdown menu on click
+                            onClick={handleUserIconClick}
+                            style={{
+                                backgroundImage: profileComplete === 'yes' && profilePicture ? `url(${profilePicture})` : undefined,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                backgroundColor: profileComplete !== 'yes' ? '#ccc' : undefined,
+                                color: profileComplete !== 'yes' ? 'white' : undefined,
+                                fontSize: profileComplete !== 'yes' ? '1.2em' : undefined,
+                            }}
                         >
-                            {firstName[0].toUpperCase()}{lastName[0].toUpperCase()}
+                            {profileComplete !== 'yes' && `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`}
                         </div>
 
-                        {/* Dropdown menu for user actions */}
                         {showMenu && (
                             <ul className="Dropdown-menu">
+                                {location.pathname === '/' && approveStatus === 'approved' && (
+                                    <li
+                                        className="Dropdown-item"
+                                        onClick={handleSwitchToTutorView}
+                                    >
+                                        Switch to Tutor View
+                                    </li>
+                                )}
+                                {['/tutor-landing', '/tutor-edit-profile', '/tutor-build-profile'].includes(location.pathname) && (
+                                    <li
+                                        className="Dropdown-item"
+                                        onClick={handleSwitchToStudentView}
+                                    >
+                                        Switch to Student View
+                                    </li>
+                                )}
                                 <li
                                     className="Dropdown-item"
-                                    onClick={handleLogout} // Logout option
+                                    onClick={handleLogout}
                                 >
                                     Logout
                                 </li>
@@ -146,7 +196,6 @@ function Header({ hideApplyButton = false }) {
                     </div>
                 ) : (
                     <div className="Header-buttons">
-                        {/* If not logged in, show Sign In and Sign Up buttons */}
                         <button
                             className="Header-button--signin"
                             onClick={() => navigate('/signin')}
@@ -155,13 +204,13 @@ function Header({ hideApplyButton = false }) {
                         </button>
                         <button
                             className="Header-button--signup"
-                            onClick={handleSignUpClick} // Navigate to Sign Up with userType=student
+                            onClick={() => navigate('/tutor-signup?userType=student')}
                         >
                             Sign Up
                         </button>
                         <button
                             className="Header-button--applytutor"
-                            onClick={handleApplyAsTutorClick} // Navigate to Apply as Tutor with userType=student
+                            onClick={handleApplyAsTutorClick}
                         >
                             Apply as a Tutor
                         </button>

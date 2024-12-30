@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/header.js';
 import '../styles/ApplyAsTutor.css';
 import Footer from '../components/footer.js';
@@ -9,7 +9,7 @@ function ApplyAsTutor() {
         questionOne: '',
         questionTwo: '',
     });
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({
@@ -43,7 +43,7 @@ function ApplyAsTutor() {
 
             if (response.ok) {
                 // Redirect to confirmation page on success
-                navigate('/tutor-request-received'); // Update the route to match your setup
+                navigate('/tutor-request-received');
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.error || 'Unknown error occurred.'}`);
@@ -56,7 +56,7 @@ function ApplyAsTutor() {
 
     return (
         <div className="apply-as-tutor-page">
-            <Header />
+            <Header hideApplyButton={true} /> {/* Pass the prop to hide the button */}
             <div className="apply-page">
                 <p>Welcome to the Apply as a Tutor Page!</p>
                 <div className="apply-content-container">

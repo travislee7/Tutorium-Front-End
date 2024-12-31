@@ -204,7 +204,7 @@ function Header({ hideApplyButton = false }) {
                         </button>
                         <button
                             className="Header-button--signup"
-                            onClick={() => navigate('/tutor-signup?userType=student')}
+                            onClick={() => navigate('/signup?userType=student')}
                         >
                             Sign Up
                         </button>

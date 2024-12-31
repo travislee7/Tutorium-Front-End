@@ -1,49 +1,18 @@
-/* src/styles/LandingPage.css */
+/* Landing Page Styling */
 .LandingPage {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;  /* Ensure it takes full viewport height */
+    min-height: 100vh;
 }
 
-.LandingPage-header {
+/* Main content (everything above the footer) */
+.LandingPage-content {
+    flex: 1;
+    /* Fills the remaining space between the header and footer */
     display: flex;
+    flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: #f9f9f9;
-}
-
-.LandingPage-footer {
-    background-color: #333;
-    color: white;
-    display: flex;
-    text-align: center;
-    position: relative;
-    align-items: center;
-    bottom: 0%;
-}
-
-.LandingPage-header-content, .LandingPage-footer {
-    display: flex;
-    align-items: center;
-}
-
-.LandingPage-logo {
-    height: 50px;
-    margin-right: 15px;
-}
-
-.LandingPage-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Centering container for dropdowns */
-.dropdown-center {
-    display: flex;
-    justify-content: center; /* Centers content horizontally */
-    align-items: center; /* Centers content vertically */
-    height: 100vh; /* Full height of the viewport */
 }
 
 /* Dropdown container */
@@ -53,31 +22,33 @@
     justify-content: flex-start;
     align-items: center;
     gap: 15px;
-    height: 100vh;
-    flex-grow: 1;
+    margin-bottom: 20px;
 }
-  
-  /* Styling for dropdowns */
+
+/* Styling for dropdowns */
 .subject-select,
 .location-select,
 .language-select {
-    margin: 30px 0;
+    margin: 15px 0;
+    width: 100%;
+    /* Full width dropdowns */
+    max-width: 300px;
 }
-  
+
 select {
     padding: 10px;
     font-size: 16px;
-    width: 200px;
+    width: 100%;
     text-align: center;
 }
 
+/* Submit Button */
 .submitbutton {
-    margin-top: -175px; /* Remove unnecessary space above the button */
-    display: flex; /* Ensures proper centering */
-    justify-content: center; /* Centers the button horizontally */
-    width: 100%; /* Matches container width */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
-  
+
 .submit {
     padding: 10px 20px;
     font-size: 16px;
@@ -86,13 +57,101 @@ select {
     color: white;
     border: none;
     border-radius: 4px;
-    width: 200px; /* Fixed width for consistency */
+    width: 200px;
     text-align: center;
-    margin-bottom: 50px;
- }
-
-/* Hover effect for items */
-.subject-select a:hover, .location-select a:hover, .submitbutton a:hover {
-    background-color: #ddd;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
 }
 
+.submit:hover {
+    background-color: #0056b3;
+}
+
+/* Divider */
+.divider {
+    width: 100%;
+    height: 2px;
+    background-color: #ddd;
+    margin: 20px 0;
+}
+
+/* Tutor Cards Container */
+.tutor-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Individual Tutor Card Styling */
+.tutor-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tutor-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Profile Picture Styling */
+.tutor-card-img {
+    width: 100%;
+    padding-top: 100%;
+    /* Makes it a square */
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Tutor Name Styling */
+.tutor-card h3 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Bubble Labels */
+.bubble-label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #007BFF;
+    text-align: left;
+}
+
+/* Bubble Container */
+.bubble-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* Individual Bubble Styling */
+.bubble {
+    padding: 6px 12px;
+    background-color: #f0f8ff;
+    /* Light user-friendly background */
+    color: #0056b3;
+    /* Darker blue text */
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #007BFF;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.bubble:hover {
+    background-color: #007BFF;
+    color: white;
+}

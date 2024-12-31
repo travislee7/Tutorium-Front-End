@@ -60,11 +60,11 @@ function SignupPage() {
                 localStorage.setItem('email', formData.email);
                 localStorage.setItem('userId', data.user_id);
 
-                if (userType === 'tutor') {
-                    navigate('/apply');
-                } else {
+                //if (userType === 'tutor') {
+                //    navigate('/apply');
+                //} else {
                     navigate('/');
-                }
+                //}
             } else {
                 setErrorMessage(data.message || 'Something went wrong!');
                 setShowErrorPopup(true);

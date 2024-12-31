@@ -1,48 +1,141 @@
-// src/pages/LandingPage.js
-import React from 'react';
-import Header from '../components/header.js'; // Import the reusable Header component
-import '../styles/LandingPage.css'; // Optional: Create a separate file for styling
+import React, { useState } from 'react';
+import Header from '../components/header.js';
 import Footer from '../components/footer.js';
+import '../styles/LandingPage.css';
 
 function LandingPage() {
+    const [subject, setSubject] = useState('');
+    const [location, setLocation] = useState('');
+    const [language, setLanguage] = useState('');
+    const [tutors, setTutors] = useState([]);
+    const [hasSearched, setHasSearched] = useState(false);
+
+    const handleSubmit = async () => {
+        const queryParams = new URLSearchParams();
+        if (subject) queryParams.append('subject', subject);
+        if (location) queryParams.append('location', location);
+        if (language) queryParams.append('language', language);
+
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/search-tutors/?${queryParams.toString()}`);
+            if (!response.ok) {
+                console.error(`Error fetching tutors: ${response.status} ${response.statusText}`);
+                return;
+            }
+            const data = await response.json();
+            console.log("Response Data:", data);
+            setTutors(data);
+            setHasSearched(true);
+        } catch (error) {
+            console.error("Error during fetch or JSON parsing:", error);
+        }
+    };
+
     return (
         <div className="LandingPage">
             <Header />
-            <div className="dropdown-container">
-                {/* Subject Select */}
-                <div className="subject-select">
-                    <select>
-                        <option value="0">Select a subject</option>
-                        <option value="1">Math</option>
-                        <option value="2">Science</option>
-                        <option value="3">English</option>
-                        <option value="4">History</option>
-                    </select>
+            <div className="LandingPage-content">
+                <div className="dropdown-container">
+                    <div className="subject-select">
+                        <select onChange={(e) => setSubject(e.target.value)}>
+                            <option value="">Select a subject</option>
+                            <option value="Math">Math</option>
+                            <option value="Science">Science</option>
+                            <option value="English">English</option>
+                            <option value="History">History</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Art">Art</option>
+                        </select>
+                    </div>
+                    <div className="location-select">
+                        <select onChange={(e) => setLocation(e.target.value)}>
+                            <option value="">Select a location</option>
+                            <option value="Seattle">Seattle</option>
+                            <option value="Bellevue">Bellevue</option>
+                            <option value="Kent">Kent</option>
+                            <option value="Renton">Renton</option>
+                            <option value="Lynnwood">Lynnwood</option>
+                            <option value="Tukwila">Tukwila</option>
+                            <option value="Kirkland">Kirkland</option>
+                            <option value="Redmond">Redmond</option>
+                        </select>
+                    </div>
+                    <div className="language-select">
+                        <select onChange={(e) => setLanguage(e.target.value)}>
+                            <option value="">Select a language</option>
+                            <option value="English">English</option>
+                            <option value="Spanish">Spanish</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Korean">Korean</option>
+                            <option value="Chinese">Chinese</option>
+                            <option value="Russian">Russian</option>
+                        </select>
+                    </div>
                 </div>
 
-                {/* Location Select */}
-                <div className="location-select">
-                    <select>
-                        <option value="0">Select a location</option>
-                        <option value="1">Seattle</option>
-                        <option value="2">Bellevue</option>
-                        <option value="3">Kent</option>
-                        <option value="4">Renton</option>
-                    </select>
+                <div className="submitbutton">
+                    <button className="submit" onClick={handleSubmit}>
+                        Submit
+                    </button>
                 </div>
-                {/* Language Select */}
-                <div className="language-select">
-                    <select>
-                        <option value="0">Select a language</option>
-                        <option value="1">English</option>
-                        <option value="2">Spanish</option>
-                    </select>
+
+                <div className="divider" />
+
+                <div className="tutor-cards">
+                    {hasSearched && tutors.length === 0 && (
+                        <p>No tutors found. Try a different search.</p>
+                    )}
+                    {tutors.map((tutor, index) => (
+                        <div key={index} className="tutor-card">
+                            <div
+                                className="tutor-card-img"
+                                style={{
+                                    backgroundImage: `url(${tutor.profile_picture})`,
+                                }}
+                            ></div>
+                            <h3>{`${tutor.user__first_name} ${tutor.user__last_name}`}</h3>
+
+                            {/* Subjects Label and Bubbles */}
+                            <div>
+                                <p className="bubble-label">Subjects:</p>
+                                <div className="bubble-container">
+                                    {tutor.subjects.split(',').map((subject, idx) => (
+                                        <span key={idx} className="bubble">
+                                            {subject.trim()}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Locations Label and Bubbles */}
+                            <div>
+                                <p className="bubble-label">Locations:</p>
+                                <div className="bubble-container">
+                                    {tutor.location.split(',').map((loc, idx) => (
+                                        <span key={idx} className="bubble">
+                                            {loc.trim()}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Languages Label and Bubbles */}
+                            <div>
+                                <p className="bubble-label">Languages:</p>
+                                <div className="bubble-container">
+                                    {tutor.language.split(',').map((lang, idx) => (
+                                        <span key={idx} className="bubble">
+                                            {lang.trim()}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
-            <div className="submitbutton">
-                <button className='submit'>Submit</button>
-            </div>
-            <Footer />
+            <Footer className="LandingPage-footer" />
         </div>
     );
 }

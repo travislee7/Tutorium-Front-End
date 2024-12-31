@@ -260,7 +260,7 @@ function TutorEditProfile() {
     const [showErrorPopup, setShowErrorPopup] = useState(false);
     const navigate = useNavigate();
 
-    // Fetch existing profile data
+    // 📊 Fetch existing profile data
     useEffect(() => {
         const fetchProfileData = async () => {
             const userId = localStorage.getItem('userId');
@@ -307,6 +307,7 @@ function TutorEditProfile() {
         fetchProfileData();
     }, []);
 
+    // ✅ Handle checkbox changes for subjects, location, and language
     const handleCheckboxChange = (e) => {
         const { name, value, checked } = e.target;
         setFormData((prev) => ({
@@ -317,14 +318,34 @@ function TutorEditProfile() {
         }));
     };
 
+    // 🛡️ **Validate and Handle Profile Picture Upload**
     const handleFileChange = (e) => {
         const file = e.target.files[0];
+
         if (file) {
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+            const maxSize = 5 * 1024 * 1024; // 5MB file size limit
+
+            // Validate file type
+            if (!allowedTypes.includes(file.type)) {
+                setErrorMessage('Only JPG, JPEG, and PNG file types are allowed.');
+                setShowErrorPopup(true);
+                return;
+            }
+
+            // Validate file size
+            if (file.size > maxSize) {
+                setErrorMessage('File size must not exceed 5MB.');
+                setShowErrorPopup(true);
+                return;
+            }
+
             setProfilePic(file);
             setPreview(URL.createObjectURL(file));
         }
     };
 
+    // 📤 Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -371,6 +392,7 @@ function TutorEditProfile() {
         }
     };
 
+    // Close Error Popup
     const closePopup = () => {
         setShowErrorPopup(false);
     };
@@ -389,89 +411,79 @@ function TutorEditProfile() {
                 </div>
 
                 <form id="tutor-profile-form" onSubmit={handleSubmit}>
+                    {/* Profile Picture */}
                     <label htmlFor="profilePic">Profile Picture:</label>
                     <input
                         type="file"
                         id="profilePic"
                         name="profilePic"
-                        accept="image/*"
+                        accept=".jpg,.jpeg,.png"
                         onChange={handleFileChange}
                     />
                     {preview && <img src={preview} alt="Profile Preview" className="profile-preview" />}
 
+                    {/* Bio */}
                     <label htmlFor="bio">Bio:</label>
                     <textarea
                         id="bio"
                         name="bio"
-                        placeholder="Write a brief bio about yourself"
                         value={formData.bio}
                         onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
                         required
                     ></textarea>
 
+                    {/* Subjects */}
                     <label>Subjects:</label>
-                    <div className="checkbox-group">
-                        {['Math', 'English', 'Physics', 'Science', 'Chemistry', 'History', 'Art'].map((subject) => (
-                            <div key={subject}>
-                                <input
-                                    type="checkbox"
-                                    name="subjects"
-                                    value={subject}
-                                    checked={formData.subjects.includes(subject)}
-                                    onChange={handleCheckboxChange}
-                                />
-                                <label>{subject}</label>
-                            </div>
-                        ))}
-                    </div>
+                    {['Math', 'English', 'Physics', 'Science', 'Chemistry', 'History', 'Art'].map((subject) => (
+                        <div key={subject}>
+                            <input
+                                type="checkbox"
+                                name="subjects"
+                                value={subject}
+                                checked={formData.subjects.includes(subject)}
+                                onChange={handleCheckboxChange}
+                            />
+                            <label>{subject}</label>
+                        </div>
+                    ))}
 
+                    {/* Location */}
                     <label>Location:</label>
-                    <div className="checkbox-group">
-                        {['Seattle', 'Kirkland', 'Bellevue', 'Redmond', 'Kent', 'Renton', 'Lynnwood', 'Tukwila'].map((location) => (
-                            <div key={location}>
-                                <input
-                                    type="checkbox"
-                                    name="location"
-                                    value={location}
-                                    checked={formData.location.includes(location)}
-                                    onChange={handleCheckboxChange}
-                                />
-                                <label>{location}</label>
-                            </div>
-                        ))}
-                    </div>
+                    {['Seattle', 'Kirkland', 'Bellevue', 'Redmond', 'Kent', 'Renton', 'Lynnwood', 'Tukwila'].map((location) => (
+                        <div key={location}>
+                            <input
+                                type="checkbox"
+                                name="location"
+                                value={location}
+                                checked={formData.location.includes(location)}
+                                onChange={handleCheckboxChange}
+                            />
+                            <label>{location}</label>
+                        </div>
+                    ))}
 
+                    {/* Language */}
                     <label>Language:</label>
-                    <div className="checkbox-group">
-                        {['English', 'Spanish', 'Japanese', 'Korean', 'Chinese', 'Russian'].map((language) => (
-                            <div key={language}>
-                                <input
-                                    type="checkbox"
-                                    name="language"
-                                    value={language}
-                                    checked={formData.language.includes(language)}
-                                    onChange={handleCheckboxChange}
-                                />
-                                <label>{language}</label>
-                            </div>
-                        ))}
-                    </div>
+                    {['English', 'Spanish', 'Japanese', 'Korean', 'Chinese', 'Russian'].map((language) => (
+                        <div key={language}>
+                            <input
+                                type="checkbox"
+                                name="language"
+                                value={language}
+                                checked={formData.language.includes(language)}
+                                onChange={handleCheckboxChange}
+                            />
+                            <label>{language}</label>
+                        </div>
+                    ))}
 
                     <button type="submit">Save Changes</button>
                 </form>
             </div>
-
-            {showErrorPopup && (
-                <div className="error-popup">
-                    <div className="error-popup-content">
-                        <p>{errorMessage}</p>
-                        <button onClick={closePopup}>Close</button>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }
 
 export default TutorEditProfile;
+
 

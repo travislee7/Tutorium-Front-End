@@ -156,16 +156,51 @@ function Header({ hideApplyButton = false }) {
                             className="User-icon"
                             onClick={handleUserIconClick}
                             style={{
-                                backgroundImage: profileComplete === 'yes' && profilePicture ? `url(${profilePicture})` : undefined,
+                        //         backgroundImage: profileComplete === 'yes' && profilePicture ? `url(${profilePicture})` : undefined,
+                        //         backgroundSize: 'cover',
+                        //         backgroundPosition: 'center',
+                        //         backgroundColor: profileComplete !== 'yes' ? '#ccc' : undefined,
+                        //         color: profileComplete !== 'yes' ? 'white' : undefined,
+                        //         fontSize: profileComplete !== 'yes' ? '1.2em' : undefined,
+                        //     }}
+                        // >
+                        //     {location.pathname === '/' && `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`}
+
+                                backgroundImage:
+                                    location.pathname === '/' && firstName && lastName
+                                        ? 'none' // Disable profile picture background on the landing page
+                                        : profileComplete === 'yes' && profilePicture
+                                            ? `url(${profilePicture})`
+                                            : undefined, // Use profile picture for other pages
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
-                                backgroundColor: profileComplete !== 'yes' ? '#ccc' : undefined,
-                                color: profileComplete !== 'yes' ? 'white' : undefined,
-                                fontSize: profileComplete !== 'yes' ? '1.2em' : undefined,
+                                backgroundColor:
+                                    location.pathname === '/' && firstName && lastName
+                                        ? '#ccc' // Blank background when showing initials
+                                        : profileComplete !== 'yes'
+                                            ? '#ccc'
+                                            : undefined, // Default background color
+                                color:
+                                    location.pathname === '/' && firstName && lastName
+                                        ? 'white' // White initials on landing page
+                                        : profileComplete !== 'yes'
+                                            ? 'white'
+                                            : undefined, // Text color for initials
+                                fontSize: '1.2em', // Font size for initials
+                                borderRadius: '50%', // Circular icon
+                                width: '40px', // Icon size
+                                height: '40px', // Icon size
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                cursor: 'pointer', // Interactive cursor
                             }}
                         >
-                            {profileComplete !== 'yes' && `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`}
+                            {location.pathname === '/' && firstName && lastName
+                                ? `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`
+                                : ''}
                         </div>
+                        
 
                         {showMenu && (
                             <ul className="Dropdown-menu">

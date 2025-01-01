@@ -1,0 +1,139 @@
+.TutorProfilePage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.profile-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
+    max-width: 500px;
+}
+
+.profile-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.tutor-card-img {
+    width: 100%;
+    padding-top: 100%;
+    /* Makes it a square */
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.profile-card h3 {
+    margin: 10px 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.bubble-label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #007BFF;
+    text-align: left;
+}
+
+.bubble-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.bubble {
+    padding: 6px 12px;
+    background-color: #f0f8ff;
+    /* Light user-friendly background */
+    color: #0056b3;
+    /* Darker blue text */
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #007BFF;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.bubble:hover {
+    background-color: #007BFF;
+    color: white;
+}
+
+.form-container {
+    text-align: center;
+    margin-top: 20px;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+#request-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#request-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: hsl(0, 0%, 33%);
+}
+
+#request-form input[type="text"],
+#request-form input[type="email"],
+#request-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+#request-form textarea {
+    height: 100px;
+    resize: none;
+}
+
+#request-form button {
+    padding: 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#request-form button:hover {
+    background-color: #0056b3;
+}
+
+#request-form button:active {
+    transform: scale(0.98);
+}

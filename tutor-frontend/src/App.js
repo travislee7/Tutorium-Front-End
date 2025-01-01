@@ -9,6 +9,7 @@ import TutorLandingPage from './pages/TutorLandingPage';
 import TutorBuildProfile from './pages/TutorBuildProfile';
 import TutorEditProfile from './pages/TutorEditProfile';
 import TutorSignupPage from './pages/TutorSignupPage';
+import TutorProfilePage from './pages/TutorProfilePage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/tutor-landing" element={<TutorLandingPage />} />
           <Route path="/tutor-build-profile" element={<TutorBuildProfile />} />
           <Route path="/tutor-edit-profile" element={<TutorEditProfile />} />
+          <Route path="/tutor/:tutorId" element={<TutorProfilePage />} />
 
         </Routes>
       </Router>

@@ -196,7 +196,7 @@ function Header({ hideApplyButton = false }) {
                                 cursor: 'pointer', // Interactive cursor
                             }}
                         >
-                            {location.pathname === '/' && firstName && lastName
+                            {(location.pathname === '/' || location.pathname === '/tutor-request-received' || location.pathname === '/apply' || ((location.pathname === '/tutor-landing' || location.pathname === '/tutor-build-profile') && profileComplete === 'no')) && firstName && lastName
                                 ? `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`
                                 : ''}
                         </div>

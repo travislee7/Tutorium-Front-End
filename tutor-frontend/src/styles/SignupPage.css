@@ -78,6 +78,24 @@
     transform: scale(0.98);
 }
 
+/* Footer Text at the Bottom of the Form */
+.signup-footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: hsl(0, 0%, 33%);
+}
+
+.signup-footer .signin-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-footer .signin-link:hover {
+    text-decoration: underline;
+}
+
+
 .error-popup {
     position: fixed;
     top: 0;

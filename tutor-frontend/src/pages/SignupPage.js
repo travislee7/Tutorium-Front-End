@@ -40,7 +40,6 @@ function SignupPage() {
 
         try {
             const payload = { ...formData, userType };
-            console.log('Payload being sent:', payload); // Debugging
 
             const response = await fetch('http://127.0.0.1:8000/api/signup/', {
                 method: 'POST',
@@ -51,7 +50,6 @@ function SignupPage() {
             });
 
             const data = await response.json();
-            console.log('Response from backend:', data); // Debugging
 
             if (response.ok) {
                 localStorage.setItem('firstName', formData.firstName);
@@ -60,22 +58,20 @@ function SignupPage() {
                 localStorage.setItem('email', formData.email);
                 localStorage.setItem('userId', data.user_id);
 
-                //if (userType === 'tutor') {
-                //    navigate('/apply');
-                //} else {
+                if (userType === 'tutor') {
+                    navigate('/apply');
+                } else {
                     navigate('/');
-                //}
+                }
             } else {
                 setErrorMessage(data.message || 'Something went wrong!');
                 setShowErrorPopup(true);
             }
         } catch (error) {
-            console.error('Error:', error);
             setErrorMessage('An error occurred. Please try again.');
             setShowErrorPopup(true);
         }
     };
-
 
     const closePopup = () => {
         setShowErrorPopup(false);
@@ -146,6 +142,13 @@ function SignupPage() {
 
                     <button type="submit">Sign Up</button>
                 </form>
+                {/* Footer Section */}
+                <p className="signup-footer">
+                    Already have an account?{' '}
+                    <a href="/signin" className="signin-link">
+                        Login
+                    </a>
+                </p>
             </div>
 
             {showErrorPopup && (

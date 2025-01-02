@@ -1,25 +1,26 @@
-/* src/styles/TutorProfilePage.css */
+/* src/styles/TutorBuildProfile.css */
 
-/* Full-Width Header Matching SignupPage */
+/* Full page container with header and centered form */
 .tutor-profile-page {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: linear-gradient(to top, #b5f7f3, #d5f7f5, #fcfcfc);
-    /* Ombre background for a fresh look */
+    background: linear-gradient(to top, #b5f7f3, #d5f7f5, #fcfcfc); /* Ombre background */
+    
 }
 
-/* Center the Form Container */
+/* Center the form container */
 .form-container {
-    text-align: center;
-    padding: 40px;
+    flex-grow: 1; /* Allow it to take remaining space */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    padding: 20px;
+    text-align: center;
 }
 
-/* Tutor Profile Form Container */
+/* Styling for the form */
 #tutor-profile-form {
     width: 100%;
     max-width: 400px;
@@ -59,6 +60,16 @@
     min-height: 100px; /* Set minimum height */
 }
 
+/* Profile Picture Preview */
+.profile-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 /* Save Profile Button */
 #tutor-profile-form button {
     width: auto;
@@ -74,17 +85,6 @@
     margin: 40px auto 0 auto;
     display: block;
 }
-
-/* Profile Picture Preview */
-.profile-preview {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-top: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
 
 #tutor-profile-form button:hover {
     background-color: #218838;

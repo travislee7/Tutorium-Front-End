@@ -14,6 +14,7 @@ function SigninPage() {
 
     const navigate = useNavigate();
 
+    // Handle input changes
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -22,6 +23,7 @@ function SigninPage() {
         setErrorMessage('');
     };
 
+    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -38,11 +40,15 @@ function SigninPage() {
             console.log('Response from backend:', data); // Debugging
 
             if (response.ok) {
-                // Save user info if needed (e.g., token)
+                // Save user info locally
+                localStorage.setItem('firstName', data.first_name);
+                localStorage.setItem('lastName', data.last_name);
+                localStorage.setItem('userType', data.user_type);
                 localStorage.setItem('email', formData.email);
+                localStorage.setItem('userId', data.user_id);
 
-                // Redirect to dashboard or home page
-                navigate('/dashboard');
+                // Redirect to the dashboard or home page
+                navigate('/');
             } else {
                 setErrorMessage(data.message || 'Invalid email or password!');
                 setShowErrorPopup(true);
@@ -54,6 +60,7 @@ function SigninPage() {
         }
     };
 
+    // Close error popup
     const closePopup = () => {
         setShowErrorPopup(false);
     };

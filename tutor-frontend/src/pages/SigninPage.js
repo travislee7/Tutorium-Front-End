@@ -68,35 +68,37 @@ function SigninPage() {
     return (
         <div className="sign-in-page">
             <Header />
-            <div className="form-container">
-                <h2>Sign In</h2>
-                <p>Welcome back! Please sign in to continue.</p>
+            <div className="sign-in-content">
+                <div className="form-container">
+                    <h2>Sign In</h2>
+                    <p>Welcome back! Please sign in to continue.</p>
 
-                <form id="sign-in-form" onSubmit={handleSubmit}>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Enter your email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
+                    <form id="sign-in-form" onSubmit={handleSubmit}>
+                        <label htmlFor="email">Email:</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
 
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Enter your password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
+                        <label htmlFor="password">Password:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
 
-                    <button type="submit">Sign In</button>
-                </form>
+                        <button type="submit">Sign In</button>
+                    </form>
+                </div>
             </div>
 
             {showErrorPopup && (

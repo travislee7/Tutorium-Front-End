@@ -7,6 +7,10 @@ function Header({ hideApplyButton = false }) {
     const navigate = useNavigate();
     const location = useLocation();
 
+    // Check if the current path matches "/tutor/:tutorId"
+    const tutorPathRegex = /^\/tutor\/\d+$/;
+    const isTutorPath = tutorPathRegex.test(location.pathname);
+
     // Get user information from localStorage
     const firstName = localStorage.getItem('firstName');
     const lastName = localStorage.getItem('lastName');
@@ -196,7 +200,7 @@ function Header({ hideApplyButton = false }) {
                                 cursor: 'pointer', // Interactive cursor
                             }}
                         >
-                            {(location.pathname === '/' || location.pathname === '/tutor-request-received' || location.pathname === '/apply' || ((location.pathname === '/tutor-landing' || location.pathname === '/tutor-build-profile') && profileComplete === 'no')) && firstName && lastName
+                            {(location.pathname === '/' || location.pathname === '/tutor-request-received' || location.pathname === '/apply' || isTutorPath || ((location.pathname === '/tutor-landing' || location.pathname === '/tutor-build-profile') && profileComplete === 'no')) && firstName && lastName
                                 ? `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`
                                 : ''}
                         </div>
@@ -204,7 +208,7 @@ function Header({ hideApplyButton = false }) {
 
                         {showMenu && (
                             <ul className="Dropdown-menu">
-                                {location.pathname === '/' && approveStatus === 'approved' && (
+                                {(location.pathname === '/' || isTutorPath) && approveStatus === 'approved' && (
                                     <li
                                         className="Dropdown-item"
                                         onClick={handleSwitchToTutorView}

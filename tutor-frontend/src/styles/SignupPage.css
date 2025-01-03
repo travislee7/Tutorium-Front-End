@@ -1,5 +1,21 @@
 /* src/styles/SignupPage.css */
 
+.signup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers content horizontally */
+    justify-content: center; /* Centers content vertically */
+    min-height: calc(100vh - 80px); /* Full viewport height minus the header's height */
+}
+
+header {
+    width: 100%;
+    position: relative; /* Keeps the header in its normal flow */
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 /* Full-Width Header Matching LandingPage */
 .signup-page {
     display: flex;

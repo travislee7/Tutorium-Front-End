@@ -1,51 +1,60 @@
-.TutorProfilePage {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.profile-content {
-    flex: 1;
+/* .TutorProfilePage {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    min-height: 100vh; 
+    background: linear-gradient(to top, #e0f7fa, #ffffff); 
     padding: 20px;
-}
+} */
 
-.profile-card {
+/* Profile Content Container */
+/* .profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+} */
+
+/* Profile Card */
+/* .profile-card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 16px;
+    padding: 20px;
     text-align: center;
     transition: transform 0.2s, box-shadow 0.2s;
     width: 100%;
-    max-width: 500px;
 }
 
 .profile-card:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
+} */
 
-.tutor-card-img {
+/* Profile Card Image */
+/* .tutor-card-img {
     width: 100%;
     padding-top: 100%;
-    /* Makes it a square */
     background-size: cover;
     background-position: center;
     border-radius: 8px;
     margin-bottom: 10px;
-}
+} */
 
-.profile-card h3 {
+/* Card Title */
+/* .profile-card h3 {
     margin: 10px 0;
     font-size: 1.5rem;
     color: #333;
-}
+} */
 
-.bubble-label {
+/* Skills/Labels Section */
+/* .bubble-label {
     font-size: 1rem;
     font-weight: bold;
     margin-bottom: 8px;
@@ -64,9 +73,7 @@
 .bubble {
     padding: 6px 12px;
     background-color: #f0f8ff;
-    /* Light user-friendly background */
     color: #0056b3;
-    /* Darker blue text */
     border-radius: 20px;
     font-size: 0.9rem;
     font-weight: bold;
@@ -78,9 +85,10 @@
 .bubble:hover {
     background-color: #007BFF;
     color: white;
-}
+} */
 
-.form-container {
+/* Form Container */
+/* .form-container {
     text-align: center;
     margin-top: 20px;
     padding: 40px;
@@ -89,9 +97,10 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
-}
+} */
 
-#request-form {
+/* Request Form */
+/* #request-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -136,4 +145,96 @@
 
 #request-form button:active {
     transform: scale(0.98);
+} */
+
+/* Mobile Responsiveness */
+/* @media (max-width: 768px) {
+    .profile-content {
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .TutorProfilePage {
+        padding: 10px;
+    }
+
+    .profile-content {
+        gap: 10px;
+    }
+
+    .profile-card {
+        padding: 15px;
+    }
+
+    .form-container {
+        padding: 15px;
+    }
+} */
+
+
+.TutorProfilePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers horizontally */
+    justify-content: center; /* Centers vertically */
+    min-height: 100vh; /* Ensures the page takes the full height of the viewport */
+    background: linear-gradient(to top, #e0f7fa, #ffffff); /* Subtle gradient background */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 600px; /* Constrains the width for larger screens */
+}
+
+/* Profile Card */
+.profile-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
+    max-width: 400px; /* Constrain the card's maximum width */
+}
+
+.profile-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .profile-content {
+        gap: 15px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 500px) {
+    .TutorProfilePage {
+        padding: 10px;
+    }
+
+    .profile-content {
+        gap: 10px;
+    }
+
+    .profile-card {
+        padding: 15px;
+    }
 }

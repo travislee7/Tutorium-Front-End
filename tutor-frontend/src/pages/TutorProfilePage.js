@@ -50,6 +50,14 @@ function TutorProfilePage() {
     }, [tutorId, studentID]);
 
     const handleToggleBookmark = async () => {
+
+        // Check if the user is logged in (firstName and lastName exist)
+        if (!formData.firstName || !formData.lastName) {
+            alert("Make an account first, to use the bookmarking feature");
+            return;
+        }
+
+
         try {
             const endpoint = isBookmarked
                 ? 'http://127.0.0.1:8000/api/unbookmark-tutor/' // Unbookmark API

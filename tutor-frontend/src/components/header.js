@@ -37,7 +37,9 @@ function Header({ hideApplyButton = false }) {
                     const profileResponse = await fetch(`http://127.0.0.1:8000/api/tutor-profile-read/?user_id=${userId}`);
                     const profileData = await profileResponse.json();
                     setProfileComplete(profileData.profile_complete);
-                    setProfilePicture(profileData.profile_picture);
+                    //setProfilePicture(profileData.profile_picture);
+                    setProfilePicture(`${profileData.profile_picture}?timestamp=${new Date().getTime()}`);
+
 
                     console.log('approve_status:', approveData.approve_status);
                     console.log('profile_data:', profileData);

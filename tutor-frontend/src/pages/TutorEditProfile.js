@@ -340,7 +340,7 @@ function TutorEditProfile() {
                 return;
             }
 
-            setProfilePic(file);
+            setProfilePic(file); 
             setPreview(URL.createObjectURL(file));
         }
     };
@@ -380,7 +380,9 @@ function TutorEditProfile() {
             const data = await response.json();
 
             if (response.ok) {
-                navigate('/tutor-landing');
+                //navigate('/tutor-landing');
+                navigate('/tutor-landing', { state: { refreshProfile: true } });
+
             } else {
                 setErrorMessage(data.message || 'Something went wrong!');
                 setShowErrorPopup(true);

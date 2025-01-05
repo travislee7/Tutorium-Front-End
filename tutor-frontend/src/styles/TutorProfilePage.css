@@ -238,3 +238,24 @@
         padding: 15px;
     }
 }
+
+
+.bookmark-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.bookmark-icon--filled {
+    transition: fill 0.3s ease;
+}
+
+.bookmark-icon--empty {
+    transition: fill 0.3s ease;
+}
+
+.bookmark-icon:hover .bookmark-icon--filled,
+.bookmark-icon:hover .bookmark-icon--empty {
+    fill: #a1e56a;
+}

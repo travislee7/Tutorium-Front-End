@@ -171,7 +171,7 @@ function Header({ hideApplyButton = false }) {
                         //     {location.pathname === '/' && `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`}
 
                                 backgroundImage:
-                                    location.pathname === '/' && firstName && lastName
+                                    (location.pathname === '/' || isTutorPath || location.pathname === '/bookmarked-tutors') && firstName && lastName
                                         ? 'none' // Disable profile picture background on the landing page
                                         : profileComplete === 'yes' && profilePicture
                                             ? `url(${profilePicture})`
@@ -179,7 +179,7 @@ function Header({ hideApplyButton = false }) {
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 backgroundColor:
-                                    location.pathname === '/' && firstName && lastName
+                                    (location.pathname === '/' || isTutorPath || location.pathname === '/bookmarked-tutors') && firstName && lastName
                                         ? '#ccc' // Blank background when showing initials
                                         : profileComplete !== 'yes'
                                             ? '#ccc'
@@ -200,7 +200,7 @@ function Header({ hideApplyButton = false }) {
                                 cursor: 'pointer', // Interactive cursor
                             }}
                         >
-                            {(location.pathname === '/' || location.pathname === '/tutor-request-received' || location.pathname === '/apply' || isTutorPath || ((location.pathname === '/tutor-landing' || location.pathname === '/tutor-build-profile') && profileComplete === 'no')) && firstName && lastName
+                            {(location.pathname === '/' || location.pathname === '/tutor-request-received' || location.pathname === '/apply' || isTutorPath || location.pathname === '/bookmarked-tutors' || ((location.pathname === '/tutor-landing' || location.pathname === '/tutor-build-profile') && profileComplete === 'no')) && firstName && lastName
                                 ? `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`
                                 : ''}
                         </div>
@@ -208,7 +208,7 @@ function Header({ hideApplyButton = false }) {
 
                         {showMenu && (
                             <ul className="Dropdown-menu">
-                                {(location.pathname === '/' || isTutorPath) && approveStatus === 'approved' && (
+                                {(location.pathname === '/' || isTutorPath || location.pathname === '/bookmarked-tutors') && approveStatus === 'approved' && (
                                     <li
                                         className="Dropdown-item"
                                         onClick={handleSwitchToTutorView}
@@ -224,6 +224,17 @@ function Header({ hideApplyButton = false }) {
                                         Switch to Student View
                                     </li>
                                 )}
+
+                                {/* Add "Bookmarked Tutors" button */}
+                                {(location.pathname === '/' || isTutorPath || location.pathname === '/bookmarked-tutors') && firstName && lastName && (
+                                    <li
+                                        className="Dropdown-item"
+                                        onClick={() => navigate('/bookmarked-tutors')}
+                                    >
+                                        Bookmarked Tutors
+                                    </li>
+                                )}
+
                                 <li
                                     className="Dropdown-item"
                                     onClick={handleLogout}

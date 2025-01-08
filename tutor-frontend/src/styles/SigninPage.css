@@ -1,23 +1,44 @@
 /* src/styles/SignInPage.css */
+/* Footer Styling */
+.SigninPage-footer {
+    width: 100%; /* Ensure it spans the full width */
+    position: relative; /* Separate it from the rest of the layout */
+    background-color: #f8f9fa; /* Light gray background */
+    padding: 20px 10px; /* Add padding for spacing */
+    text-align: center; /* Center text inside */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Optional: Shadow for better separation */
+}
+
+/* Footer Text Styling */
+.SigninPage-footer p {
+    margin: 0;
+    font-size: 14px;
+    color: hsl(0, 0%, 33%);
+}
+
+/* Footer Links Styling */
+.SigninPage-footer a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.SigninPage-footer a:hover {
+    text-decoration: underline;
+}
 
 .sign-in-page {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
-    min-height: 100vh; /* Ensures it takes the full height of the viewport */
-    background: linear-gradient(to top, #b5f7f3, #d5f7f5, #fcfcfc);
-    margin: 0; /* Ensure no unexpected margin on the body affects alignment */
-    padding: 0; /* Ensure no unexpected padding */
-    box-sizing: border-box; /* Include padding and border in width/height */
+    min-height: 100vh; /* Ensure it takes the full height of the viewport */
 }
 
 .sign-in-content {
+    flex: 1; /* Allow content to grow and push footer to the bottom */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the content horizontally */
-    justify-content: center; /* Center the content vertically */
-    min-height: calc(100vh - 80px); /* Full height minus the header's height */
+    align-items: center; /* Center the content */
+    justify-content: center;
 }
 
 header {

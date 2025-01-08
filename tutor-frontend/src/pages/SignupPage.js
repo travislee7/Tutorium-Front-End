@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/SignupPage.css';
 import Header from '../components/header.js';
+import Footer from '../components/footer.js';
 
 function SignupPage() {
     const [formData, setFormData] = useState({
@@ -161,6 +162,7 @@ function SignupPage() {
                     </div>
                 </div>
             )}
+            <Footer className="SignupPage-footer" />
         </div>
     );
 }

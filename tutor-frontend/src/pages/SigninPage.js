@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/SigninPage.css';
 import Header from '../components/header.js';
+import Footer from '../components/footer.js';
 
 function SigninPage() {
     const [formData, setFormData] = useState({
@@ -100,6 +101,7 @@ function SigninPage() {
                     </form>
                 </div>
             </div>
+            <Footer className="SigninPage-footer" />
 
             {showErrorPopup && (
                 <div className="error-popup">

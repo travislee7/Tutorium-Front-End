@@ -203,8 +203,8 @@ function TutorProfilePage() {
                         </button>
 
                         <button
-                            className="add-review-button"
-                            onClick={() => alert("Add Review functionality coming soon!")}
+                                className="add-review-button"
+                                onClick={() => window.location.href = `/tutor/${tutorId}/review`}
                         >
                             Add Review
                         </button>

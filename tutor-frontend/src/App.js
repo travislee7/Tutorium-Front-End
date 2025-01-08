@@ -10,6 +10,7 @@ import TutorBuildProfile from './pages/TutorBuildProfile';
 import TutorEditProfile from './pages/TutorEditProfile';
 import TutorSignupPage from './pages/TutorSignupPage';
 import TutorProfilePage from './pages/TutorProfilePage';
+import TutorReviewPage from './pages/TutorReviewPage';
 import BookmarkedTutors from './pages/BookmarkedTutors';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/tutor-build-profile" element={<TutorBuildProfile />} />
           <Route path="/tutor-edit-profile" element={<TutorEditProfile />} />
           <Route path="/tutor/:tutorId" element={<TutorProfilePage />} />
+          <Route path="/tutor/:tutorId/review" element={<TutorReviewPage />} />
           <Route path="/bookmarked-tutors" element={<BookmarkedTutors/>} />
 
         </Routes>

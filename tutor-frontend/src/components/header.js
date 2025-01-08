@@ -8,7 +8,7 @@ function Header({ hideApplyButton = false }) {
     const location = useLocation();
 
     // Check if the current path matches "/tutor/:tutorId"
-    const tutorPathRegex = /^\/tutor\/\d+$/;
+    const tutorPathRegex = /^\/tutor\/\d+(\/review)?$/;
     const isTutorPath = tutorPathRegex.test(location.pathname);
 
     // Get user information from localStorage

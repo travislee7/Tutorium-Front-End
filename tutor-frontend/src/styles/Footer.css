@@ -6,6 +6,9 @@
     position: relative;
     align-items: center;
     bottom: 0%;
+    width: 100%; /* Added */ 
+    box-sizing: border-box; /* Added */ 
+    overflow: hidden;  /* Added */ 
   }
   
   .footer-content {

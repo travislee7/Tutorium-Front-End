@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Header from '../components/header'; // Reusing the same header
-import Footer from '../components/footer'; // Reusing the same footer
+import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
+import Header from '../components/header';
+import Footer from '../components/footer';
 import '../styles/TutorReviewPage.css';
 
 function TutorReviewPage() {
@@ -10,6 +10,8 @@ function TutorReviewPage() {
     const [loading, setLoading] = useState(true);
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
+    const navigate = useNavigate(); // Initialize navigate hook
+    const studentID = localStorage.getItem('userId'); // Fetch the student ID from localStorage
 
     useEffect(() => {
         const fetchTutorDetails = async () => {
@@ -43,15 +45,21 @@ function TutorReviewPage() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ rating, comment }),
+                body: JSON.stringify({
+                    studentID, // Include the student ID
+                    rating,
+                    comment,
+                }),
             });
+
+            const result = await response.json();
 
             if (response.ok) {
                 alert('Review submitted successfully!');
-                setRating(0);
-                setComment('');
+                navigate('/'); // Redirect to the landing page
             } else {
-                alert('Failed to submit review');
+                // Display error message returned by the backend
+                alert(result.error || 'Failed to submit review');
             }
         } catch (error) {
             console.error('Error submitting review:', error);
@@ -63,7 +71,6 @@ function TutorReviewPage() {
 
     return (
         <div className="TutorReviewPage">
-            {/* Header Consistency */}
             <Header />
             <div className="review-container">
                 {/* Tutor Info Card */}
@@ -135,10 +142,11 @@ function TutorReviewPage() {
                     <button type="submit">Submit Review</button>
                 </form>
             </div>
-            {/* Footer Consistency */}
             <Footer />
         </div>
     );
 }
 
 export default TutorReviewPage;
+
+

@@ -21,6 +21,11 @@ function ApplyAsTutor() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (formData.questionOne.trim().length < 50 || formData.questionTwo.trim().length < 50) {
+            alert("Each response must be at least 50 characters long.");
+            return;
+        }
+
         const email = localStorage.getItem('email');
         if (!email) {
             alert('Email not found in localStorage.');
@@ -56,47 +61,71 @@ function ApplyAsTutor() {
 
     return (
         <div className="apply-as-tutor-page">
-            <Header hideApplyButton={true} /> {/* Pass the prop to hide the button */}
+            <Header hideApplyButton={true} />
+    
+            {/* Page Heading */}
             <div className="apply-page">
-                <p>Welcome to the Apply as a Tutor Page!</p>
-                <div className="apply-content-container">
-                    <p>Fill out the following questions:</p>
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="questionOne">
-                                Why do you think you can be a tutor? <br /> List your school and experience:
-                            </label>
-                            <textarea
-                                id="questionOne"
-                                name="questionOne"
-                                value={formData.questionOne}
-                                onChange={handleChange}
-                                placeholder="minimum 50 characters"
-                                rows="10"
-                                required
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="questionTwo">
-                                List Your Qualifications <br /> Have you ever worked with a different tutoring app?
-                            </label>
-                            <textarea
-                                id="questionTwo"
-                                name="questionTwo"
-                                value={formData.questionTwo}
-                                onChange={handleChange}
-                                placeholder="minimum 50 characters"
-                                rows="10"
-                                required
-                            />
-                        </div>
-                        <button type="submit" className="submit-button">Submit</button>
-                    </form>
+                <p className="page-heading">Welcome to the Apply as a Tutor Page!</p>
+    
+                {/* Main Content (Two Columns) */}
+                <div className="apply-content">
+                    {/* Left Text Section */}
+                    <div className="benefits-section">
+                        <p>Meet with your preferred student anywhere anytime within Washington state.</p>
+                        <p>Select your student and save time by easily fitting sessions into your schedule.</p>
+                        <p>No subscriptions. Get Paid, Hassle-free. Affordable options. Only pay for the time you need.</p>
+                    </div>
+    
+                    {/* Right Form Section */}
+                    <div className="apply-content-container">
+                        <p>Fill out the following questions:</p>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label htmlFor="questionOne">
+                                    Why do you think you can be a tutor? <br /> List your school and experience:
+                                </label>
+                                <textarea
+                                    id="questionOne"
+                                    name="questionOne"
+                                    value={formData.questionOne}
+                                    onChange={handleChange}
+                                    placeholder="Minimum 50 characters"
+                                    rows="10"
+                                    required
+                                />
+                                <p className="character-count">
+                                    {formData.questionOne.trim().length}/2000 characters
+                                </p>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="questionTwo">
+                                    List Your Qualifications <br /> Have you ever worked with a different tutoring app?
+                                </label>
+                                <textarea
+                                    id="questionTwo"
+                                    name="questionTwo"
+                                    value={formData.questionTwo}
+                                    onChange={handleChange}
+                                    placeholder="Minimum 50 characters"
+                                    rows="10"
+                                    required
+                                />
+                                <p className="character-count">
+                                    {formData.questionTwo.trim().length}/2000 characters
+                                </p>
+                            </div>
+                            <button type="submit" className="submit-button">Submit</button>
+                        </form>
+                    </div>
                 </div>
             </div>
+    
             <Footer />
         </div>
     );
+    
+    
+    
 }
 
 export default ApplyAsTutor;

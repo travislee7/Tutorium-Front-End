@@ -1,48 +1,72 @@
-/* src/styles/ApplyAsTutor.css */
-
-/* Full-Width Header for the ApplyAsTutor Page */
+/* src/styles/ApplyasTutor.css */
 .apply-page {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: flex-start;
+    align-items: center;
     min-height: 100vh;
     background: linear-gradient(to top, #e4e3fc, #d5f7f5, #fafaff); /* Ombre background */
+    padding: 20px;
 }
 
-/* Main Content Container */
-.apply-page h2 {
-    font-size: 2rem;
+/* Top Heading (Spans the Full Width) */
+.page-heading {
+    font-size: 1.5rem;
     text-align: center;
-    margin-top: 40px;
-    color: #9a9af5; /* Orange highlight */
-    
-}
-
-.apply-page p {
-    text-align: center;
-    font-size: 1.4rem;
-    margin-top: 40px;
-    color: #191938;
     font-weight: bold;
+    color: #2c2c34;
+    margin-bottom: 50px;
 }
 
-/* Container for additional content if needed */
+/* Main Content Below the Heading */
+.apply-content {
+    display: flex;
+    flex-direction: row; /* Two-column layout */
+    justify-content: space-between; /* Space between left and right sections */
+    align-items: flex-start;
+    width: 100%; /* Make it span the full width of the container */
+    gap: 20px; /* Add spacing between the left and right sections */
+    max-width: 1200px; /* Limit the overall width */
+}
+
+/* Left Section for the Benefits Text */
+.benefits-section {
+    flex: 1; /* Allow the left section to take up space naturally */
+    max-width: 45%; /* Limit width to avoid it expanding too much */
+    font-weight: bold;
+    color: #191938;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align text to the top */
+    gap: 100px; /* Add space between text items */
+}
+
+/* Benefits Text */
+.benefits-section p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    margin: 13;
+}
+
+/* Right Section (Apply Content) */
 .apply-content-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 70px;
-    margin-left: auto;  /* Push the container to the right */
-    margin-right: 80px; /* Add some space between the container and the right edge */
-    max-width: 800px;
+    padding: 70px; /* Padding for spacing inside the box */
+    margin-left: auto;
+    margin-right: 0; /* Align to the right */
+    max-width: 800px; /* Limit width */
     background: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
 }
 
+/* Text Inside the White Box */
 .apply-content-container p {
-    margin-top: 0; /* Eliminate unnecessary space above this text */
-    margin-bottom: 40px; /* Add a bit of space below if needed */
+    margin-top: 0;
+    margin-bottom: 40px;
     font-size: 1.4rem;
     font-weight: bold;
     color: #191938;
@@ -53,38 +77,32 @@
 .apply-content-container label {
     font-weight: bold;
     margin-bottom: 5px;
-    color: #333;  /* Adjust color as needed */
-    display: block; /* Ensure label takes up a full line */
-    margin-left: -40px; 
-}
-
-/* Style for form groups */
-.form-group {
-    margin-bottom: 40px;
-    width: 100%;
+    color: #333;
+    display: block;
+    margin-left: -40px; /* Align labels */
 }
 
 /* Input Fields (Text Boxes) */
 .apply-content-container input {
-    width: 100%;  /* Make text boxes take up the full width of the container */
+    width: 100%;
     padding: 10px;
-    margin-bottom: 20px;  /* Add space between the text boxes */
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 14px;
 }
 
-/* Style for the textarea */
+/* Style for Textareas */
 .form-group textarea {
-    width: 116%; /* Keep the wider width */
-    max-width: none; /* No constraints on max width */
+    width: 116%;
+    max-width: none;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
     resize: none;
-    margin-left: -40px; /* Shift the text box 10px to the left */
+    margin-left: -40px; /* Align with inputs */
 }
 
 /* Buttons (if any) */
@@ -111,14 +129,8 @@
     transform: scale(0.98);
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 500px) {
-    .apply-page {
-        padding: 15px;
-    }
-
-    .apply-content-container {
-        padding: 15px;
-    }
+/* Added the styling for the character count */
+.character-count {
+    font-size: 12px !important; /* Force font size to apply */
+    color: #666 !important; /* Optional: Change text color */
 }
-

@@ -30,7 +30,8 @@
 .sign-in-page {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure it takes the full height of the viewport */
+    min-height: 100vh;
+    background: linear-gradient(to top, #b5f7f3, #d5f7f5, #fcfcfc);/* Ensure it takes the full height of the viewport */
 }
 
 .sign-in-content {

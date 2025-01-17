@@ -1,9 +1,15 @@
 /* Landing Page Styling */
+/* Landing Page Styling */
 .LandingPage {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* Ensure it spans the full viewport height */
+    background: linear-gradient(to bottom, #ffffff, #e0fefd, #b3fbf7); /* Ombre effect */
+    background-repeat: no-repeat; /* Prevent tiling */
+    background-size: cover; /* Ensure it covers the container */
 }
+
+
 
 /* Main content (everything above the footer) */
 .LandingPage-content {

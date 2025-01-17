@@ -202,12 +202,28 @@ function TutorProfilePage() {
                             )}
                         </button>
 
-                        <button
+                        {/* <button
                                 className="add-review-button"
                                 onClick={() => window.location.href = `/tutor/${tutorId}/review`}
                         >
                             Add Review
+                        </button> */}
+
+                        <button
+                            className="add-review-button"
+                            onClick={() => {
+                                // Check if the user is logged in
+                                if (!formData.firstName || !formData.lastName) {
+                                    alert("You need to create an account to leave a review!");
+                                    return;
+                                }
+                                // If the user is logged in, navigate to the review page
+                                window.location.href = `/tutor/${tutorId}/review`;
+                            }}
+                        >
+                            Add Review  
                         </button>
+
                         
                     </div>
                 </div>

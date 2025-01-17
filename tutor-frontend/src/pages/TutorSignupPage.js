@@ -41,6 +41,7 @@ function TutorSignupPage() {
 
         try {
             const payload = { ...formData, userType };
+            console.log('Payload being sent:', payload);
 
             const response = await fetch('http://127.0.0.1:8000/api/signup/', {
                 method: 'POST',

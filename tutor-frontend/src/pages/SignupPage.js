@@ -15,6 +15,8 @@ function SignupPage() {
 
     const [errorMessage, setErrorMessage] = useState('');
     const [showErrorPopup, setShowErrorPopup] = useState(false);
+    const [passwordStrength, setPasswordStrength] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -28,6 +30,26 @@ function SignupPage() {
             [e.target.name]: e.target.value,
         });
         setErrorMessage('');
+
+        if (e.target.name === 'password') {
+            setPasswordStrength(validatePassword(e.target.value));
+        }
+    };
+
+    const validatePassword = (password) => {
+        const lengthCriteria = password.length >= 8;
+        const complexityCriteria =
+            /[a-z]/.test(password) &&
+            /[A-Z]/.test(password) &&
+            /[0-9]/.test(password) &&
+            /[!@#$%^&*]/.test(password);
+
+        if (lengthCriteria && complexityCriteria) {
+            return "Strong";
+        } else if (lengthCriteria) {
+            return "Weak";
+        }
+        return "Too Short";
     };
 
     const handleSubmit = async (e) => {
@@ -35,6 +57,12 @@ function SignupPage() {
 
         if (formData.password !== formData.confirmPassword) {
             setErrorMessage('Passwords do not match');
+            setShowErrorPopup(true);
+            return;
+        }
+
+        if (passwordStrength !== 'Strong') {
+            setErrorMessage('Password is not strong enough');
             setShowErrorPopup(true);
             return;
         }
@@ -76,6 +104,10 @@ function SignupPage() {
 
     const closePopup = () => {
         setShowErrorPopup(false);
+    };
+
+    const toggleShowPassword = () => {
+        setShowPassword((prev) => !prev);
     };
 
     return (
@@ -121,15 +153,28 @@ function SignupPage() {
                         />
 
                         <label htmlFor="password">Password:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Enter your password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                        />
+                        <div>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                            />
+                            <button type="button" onClick={toggleShowPassword}>
+                                {showPassword ? "Hide" : "Show"}
+                            </button>
+                        </div>
+                        <p>Password Strength: {passwordStrength}</p>
+                        <ul>
+                            <li>Minimum 8 characters</li>
+                            <li>At least one uppercase letter</li>
+                            <li>At least one lowercase letter</li>
+                            <li>At least one number</li>
+                            <li>At least one special character</li>
+                        </ul>
 
                         <label htmlFor="confirmPassword">Confirm Password:</label>
                         <input

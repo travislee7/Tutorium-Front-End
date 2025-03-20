@@ -8,9 +8,9 @@
     background-repeat: no-repeat; /* Prevent tiling */
     background-size: cover; /* Ensure it covers the container */
 }
-
-
-
+ 
+ 
+ 
 /* Main content (everything above the footer) */
 .LandingPage-content {
     flex: 1;
@@ -20,7 +20,7 @@
     align-items: center;
     padding: 20px;
 }
-
+ 
 /* Dropdown container */
 .dropdown-container {
     display: flex;
@@ -30,7 +30,7 @@
     gap: 15px;
     margin-bottom: 20px;
 }
-
+ 
 /* Styling for dropdowns */
 .subject-select,
 .location-select,
@@ -40,21 +40,21 @@
     /* Full width dropdowns */
     max-width: 300px;
 }
-
+ 
 select {
     padding: 10px;
     font-size: 16px;
     width: 100%;
     text-align: center;
 }
-
+ 
 /* Submit Button */
 .submitbutton {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
-
+ 
 .submit {
     padding: 10px 20px;
     font-size: 16px;
@@ -68,11 +68,11 @@ select {
     margin-bottom: 20px;
     transition: background-color 0.3s ease;
 }
-
+ 
 .submit:hover {
     background-color: #0056b3;
 }
-
+ 
 /* Divider */
 .divider {
     width: 100%;
@@ -80,7 +80,7 @@ select {
     background-color: #ddd;
     margin: 20px 0;
 }
-
+ 
 /* Tutor Cards Container */
 .tutor-cards {
     display: grid;
@@ -89,7 +89,7 @@ select {
     justify-content: center;
     margin-top: 20px;
 }
-
+ 
 /* Individual Tutor Card Styling */
 .tutor-card {
     background-color: #fff;
@@ -100,12 +100,12 @@ select {
     text-align: center;
     transition: transform 0.2s, box-shadow 0.2s;
 }
-
+ 
 .tutor-card:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
-
+ 
 /* Profile Picture Styling */
 .tutor-card-img {
     width: 100%;
@@ -116,14 +116,14 @@ select {
     border-radius: 8px;
     margin-bottom: 10px;
 }
-
+ 
 /* Tutor Name Styling */
 .tutor-card h3 {
     margin: 10px 0;
     font-size: 1.2rem;
     color: #333;
 }
-
+ 
 /* Bubble Labels */
 .bubble-label {
     font-size: 1rem;
@@ -132,7 +132,7 @@ select {
     color: #007BFF;
     text-align: left;
 }
-
+ 
 /* Bubble Container */
 .bubble-container {
     display: flex;
@@ -141,7 +141,7 @@ select {
     gap: 8px;
     margin-top: 10px;
 }
-
+ 
 /* Individual Bubble Styling */
 .bubble {
     padding: 6px 12px;
@@ -156,8 +156,41 @@ select {
     border: 1px solid #007BFF;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
+ 
 .bubble:hover {
     background-color: #007BFF;
     color: white;
+}
+ 
+ 
+/* For the star rating display */
+.stars {
+    display: inline-flex;
+    align-items: center;
+    margin: 8px 0;
+}
+ 
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 20px;
+    line-height: 1;
+    width: 1em;
+    margin-right: 4px;
+    color: #ccc; /* Gray star (empty) */
+    --fill: 0%;  /* By default, no gold fill */
+}
+ 
+.star::before {
+    content: '★';
+}
+ 
+.star::after {
+    content: '★';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--fill);  /* Fills star according to the --fill custom property */
+    overflow: hidden;
+    color: #FFD700;       /* Gold color */
 }

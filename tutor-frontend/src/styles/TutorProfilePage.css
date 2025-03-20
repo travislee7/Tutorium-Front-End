@@ -3,11 +3,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh; 
-    background: linear-gradient(to top, #e0f7fa, #ffffff); 
+    min-height: 100vh;
+    background: linear-gradient(to top, #e0f7fa, #ffffff);
     padding: 20px;
 } */
-
+ 
 /* Profile Content Container */
 /* .profile-content {
     display: flex;
@@ -18,7 +18,7 @@
     max-width: 600px;
     text-align: center;
 } */
-
+ 
 /* Profile Card */
 /* .profile-card {
     background-color: #fff;
@@ -30,12 +30,12 @@
     transition: transform 0.2s, box-shadow 0.2s;
     width: 100%;
 }
-
+ 
 .profile-card:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 } */
-
+ 
 /* Profile Card Image */
 /* .tutor-card-img {
     width: 100%;
@@ -45,14 +45,14 @@
     border-radius: 8px;
     margin-bottom: 10px;
 } */
-
+ 
 /* Card Title */
 /* .profile-card h3 {
     margin: 10px 0;
     font-size: 1.5rem;
     color: #333;
 } */
-
+ 
 /* Skills/Labels Section */
 .bubble-label {
     font-size: 1rem;
@@ -61,7 +61,7 @@
     color: #007BFF;
     text-align: left;
 }
-
+ 
 .bubble-container {
     display: flex;
     flex-wrap: wrap;
@@ -69,7 +69,7 @@
     gap: 8px;
     margin-top: 10px;
 }
-
+ 
 .bubble {
     padding: 6px 12px;
     background-color: #f0f8ff;
@@ -81,14 +81,14 @@
     border: 1px solid #007BFF;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
+ 
 .bubble:hover {
     background-color: #007BFF;
     color: white;
-} 
-
+}
+ 
 /* Form Container */
- .form-container {
+.form-container {
     text-align: center;
     margin-top: 20px;
     padding: 40px;
@@ -98,21 +98,21 @@
     max-width: 360px;
     width: 100%;
     margin-bottom: 20px;
-} 
-
+}
+ 
 /* Request Form */
- #request-form {
+#request-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
-
+ 
 #request-form label {
     font-weight: bold;
     margin-bottom: 5px;
     color: hsl(0, 0%, 33%);
 }
-
+ 
 #request-form input[type="text"],
 #request-form input[type="email"],
 #request-form textarea {
@@ -123,13 +123,13 @@
     font-size: 14px;
     box-sizing: border-box;
 }
-
+ 
 #request-form textarea {
     height: 100px;
     width: 350px;
     resize: none;
 }
-
+ 
 #request-form button {
     padding: 12px;
     background-color: #007BFF;
@@ -140,46 +140,46 @@
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
+ 
 #request-form button:hover {
     background-color: #0056b3;
 }
-
+ 
 #request-form button:active {
     transform: scale(0.98);
-} 
-
+}
+ 
 /* Mobile Responsiveness */
 /* @media (max-width: 768px) {
     .profile-content {
         gap: 15px;
         padding: 15px;
     }
-
+ 
     .form-container {
         padding: 20px;
     }
 }
-
+ 
 @media (max-width: 500px) {
     .TutorProfilePage {
         padding: 10px;
     }
-
+ 
     .profile-content {
         gap: 10px;
     }
-
+ 
     .profile-card {
         padding: 15px;
     }
-
+ 
     .form-container {
         padding: 15px;
     }
 } */
-
-
+ 
+ 
 .TutorProfilePage {
     display: flex;
     flex-direction: column;
@@ -190,7 +190,7 @@
     padding: 20px;
     box-sizing: border-box;
 }
-
+ 
 .profile-content {
     display: flex;
     flex-direction: column;
@@ -200,7 +200,7 @@
     width: 100%;
     max-width: 600px; /* Constrains the width for larger screens */
 }
-
+ 
 /* Profile Card */
 .profile-card {
     background-color: #fff;
@@ -213,32 +213,32 @@
     width: 100%;
     max-width: 400px; /* Constrain the card's maximum width */
 }
-
+ 
 .profile-card:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
-
+ 
 .bookmark-icon {
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
 }
-
+ 
 .bookmark-icon--filled {
     transition: fill 0.3s ease;
 }
-
+ 
 .bookmark-icon--empty {
     transition: fill 0.3s ease;
 }
-
+ 
 .bookmark-icon:hover .bookmark-icon--filled,
 .bookmark-icon:hover .bookmark-icon--empty {
     fill: #a1e56a;
 }
-
+ 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .profile-content {
@@ -246,17 +246,52 @@
         padding: 15px;
     }
 }
-
+ 
 @media (max-width: 500px) {
     .TutorProfilePage {
         padding: 10px;
     }
-
+ 
     .profile-content {
         gap: 10px;
     }
-
+ 
     .profile-card {
         padding: 15px;
     }
+}
+ 
+ 
+/* Container for the stars */
+.stars {
+    display: inline-flex;
+    align-items: center;
+}
+ 
+/* Base star styling (empty by default) */
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 24px;
+    line-height: 1;
+    width: 1em;
+    margin-right: 4px;
+    color: #ccc; /* Gray color for the empty star */
+    --fill: 0%;  /* By default, the fill is 0% */
+}
+ 
+/* The empty star is displayed via the star's main content */
+.star::before {
+    content: '★';
+}
+ 
+/* The filled portion of the star is displayed via the ::after pseudo-element */
+.star::after {
+    content: '★';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--fill);  /* The star fill is set by the --fill custom property */
+    overflow: hidden;
+    color: #FFD700; /* Gold color */
 }

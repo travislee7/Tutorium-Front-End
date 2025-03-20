@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/header.js';
 import Footer from '../components/footer.js';
 import '../styles/LandingPage.css';
-
+ 
 function LandingPage() {
     const [subject, setSubject] = useState('');
     const [location, setLocation] = useState('');
@@ -11,13 +11,13 @@ function LandingPage() {
     const [tutors, setTutors] = useState([]);
     const [hasSearched, setHasSearched] = useState(false);
     const navigate = useNavigate();
-
+ 
     const handleSubmit = async () => {
         const queryParams = new URLSearchParams();
         if (subject) queryParams.append('subject', subject);
         if (location) queryParams.append('location', location);
         if (language) queryParams.append('language', language);
-
+ 
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/search-tutors/?${queryParams.toString()}`);
             if (!response.ok) {
@@ -32,7 +32,33 @@ function LandingPage() {
             console.error("Error during fetch or JSON parsing:", error);
         }
     };
-
+ 
+    /**
+     * Renders an array of 5 stars, each with a fill percentage (0% to 100%).
+     * For example, if rating=3.43:
+     *  - Star 1: 100%
+     *  - Star 2: 100%
+     *  - Star 3: 100%
+     *  - Star 4: 43%
+     *  - Star 5: 0%
+     */
+    const renderStars = (rating = 0) => {
+        const totalStars = 5;
+        const stars = [];
+ 
+        for (let i = 0; i < totalStars; i++) {
+            const starValue = rating - i; // how much rating is left for this star
+            let fillPercentage = 0;
+            if (starValue >= 1) {
+                fillPercentage = 100; // full star
+            } else if (starValue > 0) {
+                fillPercentage = starValue * 100; // partial star
+            }
+            stars.push(fillPercentage);
+        }
+        return stars;
+    };
+ 
     return (
         <div className="LandingPage">
             <Header />
@@ -75,15 +101,15 @@ function LandingPage() {
                         </select>
                     </div>
                 </div>
-
+ 
                 <div className="submitbutton">
                     <button className="submit" onClick={handleSubmit}>
                         Submit
                     </button>
                 </div>
-
+ 
                 <div className="divider" />
-
+ 
                 <div className="tutor-cards">
                     {hasSearched && tutors.length === 0 && (
                         <p>No tutors found. Try a different search.</p>
@@ -92,7 +118,7 @@ function LandingPage() {
                         <div
                             key={index}
                             className="tutor-card"
-                            onClick={() => navigate(`/tutor/${tutor.user__id}`)} // Navigate to tutor profile page
+                            onClick={() => navigate(`/tutor/${tutor.user__id}`)}
                             style={{ cursor: 'pointer' }}
                         >
                             <div
@@ -102,7 +128,18 @@ function LandingPage() {
                                 }}
                             ></div>
                             <h3>{`${tutor.user__first_name} ${tutor.user__last_name}`}</h3>
-
+ 
+                            {/* Average Rating Stars */}
+                            <div className="stars">
+                                {renderStars(tutor.average_rating).map((fill, idx) => (
+                                    <span
+                                        key={idx}
+                                        className="star"
+                                        style={{ '--fill': `${fill}%` }}
+                                    ></span>
+                                ))}
+                            </div>
+ 
                             {/* Subjects Label and Bubbles */}
                             <div>
                                 <p className="bubble-label">Subjects:</p>
@@ -114,7 +151,7 @@ function LandingPage() {
                                     ))}
                                 </div>
                             </div>
-
+ 
                             {/* Locations Label and Bubbles */}
                             <div>
                                 <p className="bubble-label">Locations:</p>
@@ -126,7 +163,7 @@ function LandingPage() {
                                     ))}
                                 </div>
                             </div>
-
+ 
                             {/* Languages Label and Bubbles */}
                             <div>
                                 <p className="bubble-label">Languages:</p>
@@ -146,5 +183,5 @@ function LandingPage() {
         </div>
     );
 }
-
+ 
 export default LandingPage;

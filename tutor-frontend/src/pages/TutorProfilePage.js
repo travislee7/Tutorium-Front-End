@@ -3,24 +3,23 @@ import { useParams } from 'react-router-dom';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import '../styles/TutorProfilePage.css';
-
+ 
 function TutorProfilePage() {
     const { tutorId } = useParams();
-    const studentID = localStorage.getItem('userId') || ''; // Retrieve studentID from localStorage
+    const studentID = localStorage.getItem('userId') || '';
     const [tutor, setTutor] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [isBookmarked, setIsBookmarked] = useState(false); // Bookmark state
+    const [isBookmarked, setIsBookmarked] = useState(false);
     const [formData, setFormData] = useState({
         firstName: localStorage.getItem('firstName') || '',
         lastName: localStorage.getItem('lastName') || '',
         email: localStorage.getItem('email') || '',
         description: '',
     });
-
+ 
     useEffect(() => {
         const fetchTutorDetails = async () => {
             try {
-                // Fetch tutor details
                 const response = await fetch(`http://127.0.0.1:8000/api/tutor-details/${tutorId}/`);
                 if (!response.ok) {
                     console.error(`Error fetching tutor details: ${response.status} ${response.statusText}`);
@@ -28,8 +27,8 @@ function TutorProfilePage() {
                 }
                 const data = await response.json();
                 setTutor(data);
-
-                // Check if the tutor is bookmarked
+ 
+                // Check bookmark status
                 const bookmarkResponse = await fetch('http://127.0.0.1:8000/api/is-tutor-bookmarked/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -45,33 +44,57 @@ function TutorProfilePage() {
                 setLoading(false);
             }
         };
-
         fetchTutorDetails();
     }, [tutorId, studentID]);
-
+ 
+    /**
+     * This function returns an array of length 5 (for 5 stars).
+     * Each element is the "fill percentage" of that star (0% to 100%).
+     * For example, if rating = 3.43:
+     * - Star 1 (index 0): fill = 100%
+     * - Star 2 (index 1): fill = 100%
+     * - Star 3 (index 2): fill = 100%
+     * - Star 4 (index 3): fill = 43%
+     * - Star 5 (index 4): fill = 0%
+     */
+    const renderStars = (rating = 0) => {
+        const totalStars = 5;
+        const stars = [];
+ 
+        for (let i = 0; i < totalStars; i++) {
+            // starIndex 0 => 1st star, starIndex 1 => 2nd star, etc.
+            const starIndex = i;
+            // how much rating is left for this star
+            const starValue = rating - starIndex;
+ 
+            let fillPercentage = 0;
+            if (starValue >= 1) {
+                fillPercentage = 100; // fully filled
+            } else if (starValue > 0) {
+                fillPercentage = starValue * 100; // partial fill
+            }
+            stars.push(fillPercentage);
+        }
+        return stars;
+    };
+ 
     const handleToggleBookmark = async () => {
-
-        // Check if the user is logged in (firstName and lastName exist)
         if (!formData.firstName || !formData.lastName) {
             alert("Make an account first, to use the bookmarking feature");
             return;
         }
-
-
         try {
             const endpoint = isBookmarked
-                ? 'http://127.0.0.1:8000/api/unbookmark-tutor/' // Unbookmark API
-                : 'http://127.0.0.1:8000/api/bookmark-tutor/'; // Bookmark API
+                ? 'http://127.0.0.1:8000/api/unbookmark-tutor/'
+                : 'http://127.0.0.1:8000/api/bookmark-tutor/';
             const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ studentID, tutorID: tutorId }),
             });
-
             const data = await response.json();
-
             if (response.ok) {
-                setIsBookmarked((prev) => !prev); // Toggle bookmark state
+                setIsBookmarked((prev) => !prev);
                 alert(data.message || (isBookmarked ? 'Tutor unbookmarked' : 'Tutor bookmarked'));
             } else {
                 console.error(data.error || 'Failed to toggle bookmark.');
@@ -80,14 +103,14 @@ function TutorProfilePage() {
             console.error('Error toggling bookmark:', error);
         }
     };
-
+ 
     const handleChange = (e) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
         });
     };
-
+ 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const requestData = {
@@ -95,21 +118,17 @@ function TutorProfilePage() {
             tutorFirstName: tutor.user__first_name,
             tutorLastName: tutor.user__last_name,
             tutorId,
-            studentID, // Include studentID in the request payload
+            studentID,
         };
-
         try {
             const response = await fetch('http://127.0.0.1:8000/api/tutor-request-email/', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData),
             });
-
             if (response.ok) {
                 alert('Your request has been submitted successfully! You will receive an email receipt shortly.');
-                setFormData({ ...formData, description: '' }); // Clear the description field
+                setFormData({ ...formData, description: '' });
             } else {
                 alert('Failed to send your request. Please try again.');
             }
@@ -118,10 +137,10 @@ function TutorProfilePage() {
             alert('An error occurred. Please try again.');
         }
     };
-
+ 
     if (loading) return <p>Loading...</p>;
     if (!tutor) return <p>Error loading tutor details.</p>;
-
+ 
     return (
         <div className="TutorProfilePage">
             <Header />
@@ -129,17 +148,28 @@ function TutorProfilePage() {
                 <div className="profile-card">
                     <div
                         className="tutor-card-img"
-                        style={{
-                            backgroundImage: `url(${tutor.profile_picture})`,
-                        }}
+                        style={{ backgroundImage: `url(${tutor.profile_picture})` }}
                     ></div>
                     <h3>{`${tutor.user__first_name} ${tutor.user__last_name}`}</h3>
-
+ 
+                    {/* Display the average rating as partial stars */}
+                    <div className="bubble-container">
+                        <p className="bubble-label">Average Rating:</p>
+                        <div className="stars">
+                            {renderStars(tutor.average_rating).map((fill, idx) => (
+                                <span
+                                    key={idx}
+                                    className="star"
+                                    style={{ '--fill': `${fill}%` }}
+                                ></span>
+                            ))}
+                        </div>
+                    </div>
+ 
                     <div className="bubble-container">
                         <p className="bubble-label">Bio:</p>
                         <p>{tutor.bio}</p>
                     </div>
-
                     <div className="bubble-container">
                         <p className="bubble-label">Subjects:</p>
                         {tutor.subjects.split(',').map((subject, idx) => (
@@ -148,7 +178,6 @@ function TutorProfilePage() {
                             </span>
                         ))}
                     </div>
-
                     <div className="bubble-container">
                         <p className="bubble-label">Locations:</p>
                         {tutor.location.split(',').map((loc, idx) => (
@@ -157,7 +186,6 @@ function TutorProfilePage() {
                             </span>
                         ))}
                     </div>
-
                     <div className="bubble-container">
                         <p className="bubble-label">Languages:</p>
                         {tutor.language.split(',').map((lang, idx) => (
@@ -166,10 +194,6 @@ function TutorProfilePage() {
                             </span>
                         ))}
                     </div>
-
-
-
-                    {/* Bookmark Icon */}
                     <div className="action-buttons">
                         <button
                             className="bookmark-icon"
@@ -201,33 +225,21 @@ function TutorProfilePage() {
                                 </svg>
                             )}
                         </button>
-
-                        {/* <button
-                                className="add-review-button"
-                                onClick={() => window.location.href = `/tutor/${tutorId}/review`}
-                        >
-                            Add Review
-                        </button> */}
-
+ 
                         <button
                             className="add-review-button"
                             onClick={() => {
-                                // Check if the user is logged in
                                 if (!formData.firstName || !formData.lastName) {
                                     alert("You need to create an account to leave a review!");
                                     return;
                                 }
-                                // If the user is logged in, navigate to the review page
                                 window.location.href = `/tutor/${tutorId}/review`;
                             }}
                         >
-                            Add Review  
+                            Add Review
                         </button>
-
-                        
                     </div>
                 </div>
-
                 <div className="form-container">
                     <h2>Request Tutor</h2>
                     <form id="request-form" onSubmit={handleSubmit}>
@@ -240,7 +252,6 @@ function TutorProfilePage() {
                             onChange={handleChange}
                             required
                         />
-
                         <label htmlFor="lastName">Last Name:</label>
                         <input
                             type="text"
@@ -250,7 +261,6 @@ function TutorProfilePage() {
                             onChange={handleChange}
                             required
                         />
-
                         <label htmlFor="email">Email Address:</label>
                         <input
                             type="email"
@@ -260,7 +270,6 @@ function TutorProfilePage() {
                             onChange={handleChange}
                             required
                         />
-
                         <label htmlFor="description">Description:</label>
                         <textarea
                             id="description"
@@ -268,8 +277,7 @@ function TutorProfilePage() {
                             value={formData.description}
                             onChange={handleChange}
                             required
-                        ></textarea>
-
+                        />
                         <button type="submit">Send Request</button>
                     </form>
                 </div>
@@ -278,5 +286,5 @@ function TutorProfilePage() {
         </div>
     );
 }
-
+ 
 export default TutorProfilePage;

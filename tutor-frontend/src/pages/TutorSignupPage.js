@@ -15,6 +15,8 @@ function TutorSignupPage() {
 
     const [errorMessage, setErrorMessage] = useState('');
     const [showErrorPopup, setShowErrorPopup] = useState(false);
+    const [passwordStrength, setPasswordStrength] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -28,6 +30,26 @@ function TutorSignupPage() {
             [e.target.name]: e.target.value,
         });
         setErrorMessage('');
+
+        if (e.target.name === 'password') {
+            setPasswordStrength(validatePassword(e.target.value));
+        }
+    };
+
+    const validatePassword = (password) => {
+        const lengthCriteria = password.length >= 8;
+        const complexityCriteria =
+            /[a-z]/.test(password) &&
+            /[A-Z]/.test(password) &&
+            /[0-9]/.test(password) &&
+            /[!@#$%^&*]/.test(password);
+
+        if (lengthCriteria && complexityCriteria) {
+            return "Strong";
+        } else if (lengthCriteria) {
+            return "Weak";
+        }
+        return "Too Short";
     };
 
     const handleSubmit = async (e) => {
@@ -39,9 +61,14 @@ function TutorSignupPage() {
             return;
         }
 
+        if (passwordStrength !== 'Strong') {
+            setErrorMessage('Password is not strong enough');
+            setShowErrorPopup(true);
+            return;
+        }
+
         try {
             const payload = { ...formData, userType };
-            console.log('Payload being sent:', payload);
 
             const response = await fetch('http://127.0.0.1:8000/api/signup/', {
                 method: 'POST',
@@ -52,7 +79,6 @@ function TutorSignupPage() {
             });
 
             const data = await response.json();
-            console.log('Response from backend:', data);
 
             if (response.ok) {
                 localStorage.setItem('firstName', formData.firstName);
@@ -61,13 +87,16 @@ function TutorSignupPage() {
                 localStorage.setItem('email', formData.email);
                 localStorage.setItem('userId', data.user_id);
 
-                navigate('/apply'); // Redirect to ApplyAsTutor page
+                if (userType === 'student') {
+                    navigate('/apply');
+                } else {
+                    navigate('/');
+                }
             } else {
                 setErrorMessage(data.message || 'Something went wrong!');
                 setShowErrorPopup(true);
             }
         } catch (error) {
-            console.error('Error:', error);
             setErrorMessage('An error occurred. Please try again.');
             setShowErrorPopup(true);
         }
@@ -75,6 +104,10 @@ function TutorSignupPage() {
 
     const closePopup = () => {
         setShowErrorPopup(false);
+    };
+
+    const toggleShowPassword = () => {
+        setShowPassword((prev) => !prev);
     };
 
     return (
@@ -120,15 +153,28 @@ function TutorSignupPage() {
                         />
 
                         <label htmlFor="password">Password:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Enter your password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                        />
+                        <div>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                            />
+                            <button type="button" onClick={toggleShowPassword}>
+                                {showPassword ? "Hide" : "Show"}
+                            </button>
+                        </div>
+                        <p>Password Strength: {passwordStrength}</p>
+                        <ul>
+                            <li>Minimum 8 characters</li>
+                            <li>At least one uppercase letter</li>
+                            <li>At least one lowercase letter</li>
+                            <li>At least one number</li>
+                            <li>At least one special character</li>
+                        </ul>
 
                         <label htmlFor="confirmPassword">Confirm Password:</label>
                         <input

@@ -118,7 +118,29 @@ function LandingPage() {
                         <div
                             key={index}
                             className="tutor-card"
-                            onClick={() => navigate(`/tutor/${tutor.user__id}`)}
+                            onClick={() => 
+                                
+                            {
+                                const viewerId = localStorage.getItem('userId');
+                                const tutorId = tutor.user__id;
+
+                                // Log the profile view
+                                fetch('http://127.0.0.1:8000/api/log-view/', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({
+                                        tutor_id: tutorId,
+                                        viewer_id: viewerId,
+                                    }),
+                                })
+                                    .then((res) => res.json())
+                                    .then((data) => console.log('View log response:', data))
+                                    .catch((err) => console.error('Failed to log view:', err));
+
+                                //.catch((err) => console.error('Failed to log view:', err));
+
+                                
+                                navigate(`/tutor/${tutor.user__id}`); }}
                             style={{ cursor: 'pointer' }}
                         >
                             <div

@@ -58,7 +58,8 @@ function Header({ hideApplyButton = false }) {
 
     // Navigation logic for the Tutorium logo click
     const handleLogoClick = () => {
-        const tutorPages = ['/tutor-edit-profile', '/tutor-build-profile', '/tutor-landing'];
+        const tutorPages = ['/tutor-edit-profile', '/tutor-build-profile', '/tutor-landing', '/tutor-viewers' // ← ADD THIS
+];
         if (tutorPages.includes(location.pathname)) {
             navigate('/tutor-landing'); // Redirect to TutorLandingPage
         } else {
@@ -218,7 +219,7 @@ function Header({ hideApplyButton = false }) {
                                         Switch to Tutor View
                                     </li>
                                 )}
-                                {['/tutor-landing', '/tutor-edit-profile', '/tutor-build-profile'].includes(location.pathname) && (
+                                {['/tutor-landing', '/tutor-edit-profile', '/tutor-build-profile', '/tutor-viewers'].includes(location.pathname) && (
                                     <li
                                         className="Dropdown-item"
                                         onClick={handleSwitchToStudentView}

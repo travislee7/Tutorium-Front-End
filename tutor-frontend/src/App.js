@@ -12,6 +12,8 @@ import TutorSignupPage from './pages/TutorSignupPage';
 import TutorProfilePage from './pages/TutorProfilePage';
 import TutorReviewPage from './pages/TutorReviewPage';
 import BookmarkedTutors from './pages/BookmarkedTutors';
+import TutorViewersPage from './pages/TutorViewers';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
           <Route path="/tutor/:tutorId" element={<TutorProfilePage />} />
           <Route path="/tutor/:tutorId/review" element={<TutorReviewPage />} />
           <Route path="/bookmarked-tutors" element={<BookmarkedTutors/>} />
+
+          <Route path="/tutor-viewers" element={<TutorViewersPage/>} />
 
         </Routes>
       </Router>

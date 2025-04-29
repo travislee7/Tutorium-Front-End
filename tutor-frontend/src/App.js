@@ -14,6 +14,7 @@ import TutorReviewPage from './pages/TutorReviewPage';
 import BookmarkedTutors from './pages/BookmarkedTutors';
 import TutorViewersPage from './pages/TutorViewers';
 import TutorRequests from './pages/TutorRequests'
+import MfaPage from './pages/MfaPage';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -35,7 +36,7 @@ function App() {
           <Route path="/tutor/:tutorId" element={<TutorProfilePage />} />
           <Route path="/tutor/:tutorId/review" element={<TutorReviewPage />} />
           <Route path="/bookmarked-tutors" element={<BookmarkedTutors/>} />
-
+          <Route path="/mfa" element={<MfaPage />} />
           <Route path="/tutor-viewers" element={<TutorViewersPage/>} />
           <Route path="/tutor-requests" element={<TutorRequests />} />
 

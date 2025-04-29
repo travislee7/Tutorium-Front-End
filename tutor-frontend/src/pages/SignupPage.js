@@ -54,53 +54,58 @@ function SignupPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (formData.password !== formData.confirmPassword) {
             setErrorMessage('Passwords do not match');
             setShowErrorPopup(true);
             return;
         }
-
+    
         if (passwordStrength !== 'Strong') {
             setErrorMessage('Password is not strong enough');
             setShowErrorPopup(true);
             return;
         }
-
+    
         try {
-            const payload = { ...formData, userType };
-
-            const response = await fetch('http://127.0.0.1:8000/api/signup/', {
+            const payload = {
+                ...formData,
+                userType,
+            };
+    
+            const response = await fetch('http://127.0.0.1:8000/api/initiate-signup/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(payload),
             });
-
+    
             const data = await response.json();
-
+    
             if (response.ok) {
+                localStorage.setItem('email', formData.email);
+                localStorage.setItem('userType', userType);
                 localStorage.setItem('firstName', formData.firstName);
                 localStorage.setItem('lastName', formData.lastName);
-                localStorage.setItem('userType', userType);
-                localStorage.setItem('email', formData.email);
-                localStorage.setItem('userId', data.user_id);
-
-                if (userType === 'tutor') {
-                    navigate('/apply');
-                } else {
-                    navigate('/');
-                }
+                localStorage.setItem('password', formData.password); 
+    
+                // Move to MFA page, pass email as route state
+                navigate('/mfa', { state: { email: formData.email } });
             } else {
-                setErrorMessage(data.message || 'Something went wrong!');
+                setErrorMessage(data.error || 'Failed to send verification code');
                 setShowErrorPopup(true);
             }
-        } catch (error) {
+        } catch (err) {
+            console.error(err);
             setErrorMessage('An error occurred. Please try again.');
             setShowErrorPopup(true);
         }
     };
+    
+    
+    
+    
 
     const closePopup = () => {
         setShowErrorPopup(false);

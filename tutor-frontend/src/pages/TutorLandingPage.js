@@ -15,6 +15,9 @@ import { useNavigate } from 'react-router-dom';
 const TutorLandingPage = () => {
     const [viewCount, setViewCount] = useState(null);
     const [viewHistory, setViewHistory] = useState([]);
+
+    const [requestCount, setRequestCount] = useState(null);
+
     const userId = localStorage.getItem('userId');
     const navigate = useNavigate();
 
@@ -29,6 +32,15 @@ const TutorLandingPage = () => {
                 })
                 .catch((err) => console.error('Error fetching view count:', err));
 
+
+            fetch(`http://127.0.0.1:8000/api/tutor/${userId}/request-count/`)
+                .then((res) => res.json())
+                .then((data) => {
+                    setRequestCount(data.request_count ?? 0);
+                })
+                .catch((err) => console.error('Error fetching request count:', err));
+                
+                
             // Fetch view history per day
             fetch(`http://127.0.0.1:8000/api/tutor/${userId}/view-history/`)
                 .then((res) => res.json())
@@ -55,6 +67,16 @@ const TutorLandingPage = () => {
 
                     >
                         <strong>Total Views:</strong> {viewCount}
+                    </p>
+                )}
+
+
+                {requestCount !== null && (
+                    <p
+                        style={{ fontSize: '18px', cursor: 'pointer', textDecoration: 'underline' }}
+                        onClick={() => navigate('/tutor-requests')}
+                    >                        
+                    <strong>Number of Requests:</strong> {requestCount}
                     </p>
                 )}
 

@@ -127,9 +127,28 @@ function TutorProfilePage() {
                 body: JSON.stringify(requestData),
             });
             if (response.ok) {
+                // ALSO send the second request to save request form info
+                const saveInfoResponse = await fetch('http://127.0.0.1:8000/api/save-request-form-info/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        requesterFirstName: formData.firstName,
+                        requesterLastName: formData.lastName,
+                        requesterEmail: formData.email,
+                        requesterDescription: formData.description,
+                        tutorID: tutorId,
+                    }),
+                });
+
+                if (!saveInfoResponse.ok) {
+                    console.error('Failed to save request form info.');
+                }
+
+
                 alert('Your request has been submitted successfully! You will receive an email receipt shortly.');
                 setFormData({ ...formData, description: '' });
-            } else {
+            } 
+            else {
                 alert('Failed to send your request. Please try again.');
             }
         } catch (error) {

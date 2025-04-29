@@ -219,7 +219,7 @@ function Header({ hideApplyButton = false }) {
                                         Switch to Tutor View
                                     </li>
                                 )}
-                                {['/tutor-landing', '/tutor-edit-profile', '/tutor-build-profile', '/tutor-viewers'].includes(location.pathname) && (
+                                {['/tutor-landing', '/tutor-edit-profile', '/tutor-build-profile', '/tutor-viewers', '/tutor-requests'].includes(location.pathname) && (
                                     <li
                                         className="Dropdown-item"
                                         onClick={handleSwitchToStudentView}

@@ -27,29 +27,46 @@ function SigninPage() {
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
+            // Step 1: Validate email and password
             const response = await fetch('http://127.0.0.1:8000/api/signin/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(formData,),
             });
-
+    
             const data = await response.json();
-            console.log('Response from backend:', data); // Debugging
-
+            console.log('Response from backend:', data);
+    
             if (response.ok) {
-                // Save user info locally
+                // Save basic user info temporarily
+                localStorage.setItem('email', formData.email);
                 localStorage.setItem('firstName', data.first_name);
                 localStorage.setItem('lastName', data.last_name);
                 localStorage.setItem('userType', data.user_type);
-                localStorage.setItem('email', formData.email);
                 localStorage.setItem('userId', data.user_id);
-
-                // Redirect to the dashboard or home page
-                navigate('/');
+    
+                // Step 2: Request a 2FA code
+                const codeResponse = await fetch('http://127.0.0.1:8000/api/send-2fa-code/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: formData.email, mode: 'signin' }),
+                });
+    
+                const codeData = await codeResponse.json();
+                if (codeResponse.ok) {
+                    // Redirect to 2FA verification page
+                    localStorage.setItem('authFlow', 'signin');
+                    navigate('/mfa');
+                } else {
+                    setErrorMessage(codeData.error || 'Failed to send 2FA code.');
+                    setShowErrorPopup(true);
+                }
             } else {
                 setErrorMessage(data.message || 'Invalid email or password!');
                 setShowErrorPopup(true);
@@ -60,6 +77,7 @@ function SigninPage() {
             setShowErrorPopup(true);
         }
     };
+    
 
     // Close error popup
     const closePopup = () => {

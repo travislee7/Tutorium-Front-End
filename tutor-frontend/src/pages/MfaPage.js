@@ -13,19 +13,21 @@ function VerifyCodePage() {
             setError("Email is required for verification.");
             return;
         }
-
-        console.log('Verifying email:', email, 'with code:', code);
-
+    
+        const mode = localStorage.getItem('authFlow') || 'signin'; // fallback just in case
+    
+        console.log('Verifying email:', email, 'with code:', code, 'and mode:', mode);
+    
         const response = await fetch('http://127.0.0.1:8000/api/verify-2fa-code/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, code }),
+            body: JSON.stringify({ email, code, mode }),
         });
-
+    
         const data = await response.json();
-
+    
         if (response.ok) {
             localStorage.setItem('userId', data.user_id);
             const userType = localStorage.getItem('userType');
@@ -38,6 +40,7 @@ function VerifyCodePage() {
             setError(data.error || 'Invalid or expired code');
         }
     };
+    
 
     return (
         <div className="verify-code-page">

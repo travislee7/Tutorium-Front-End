@@ -71,6 +71,7 @@ function SignupPage() {
             const payload = {
                 ...formData,
                 userType,
+                mode: 'signup',
             };
     
             const response = await fetch('http://127.0.0.1:8000/api/initiate-signup/', {
@@ -91,6 +92,7 @@ function SignupPage() {
                 localStorage.setItem('password', formData.password); 
     
                 // Move to MFA page, pass email as route state
+                localStorage.setItem('authFlow', 'signup');
                 navigate('/mfa', { state: { email: formData.email } });
             } else {
                 setErrorMessage(data.error || 'Failed to send verification code');

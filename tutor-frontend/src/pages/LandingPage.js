@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/header.js';
 import Footer from '../components/footer.js';
 import '../styles/LandingPage.css';
+
+const API_BASE_URL = process.env.REACT_APP_API_URL;
  
 function LandingPage() {
     const [subject, setSubject] = useState('');
@@ -19,7 +21,7 @@ function LandingPage() {
         if (language) queryParams.append('language', language);
  
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/search-tutors/?${queryParams.toString()}`);
+            const response = await fetch(`${API_BASE_URL}/api/search-tutors/?${queryParams.toString()}`);
             if (!response.ok) {
                 console.error(`Error fetching tutors: ${response.status} ${response.statusText}`);
                 return;
@@ -125,7 +127,7 @@ function LandingPage() {
                                 const tutorId = tutor.user__id;
 
                                 // Log the profile view
-                                fetch('http://127.0.0.1:8000/api/log-view/', {
+                                fetch(`${API_BASE_URL}/api/log-view/`, {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({

@@ -4,6 +4,8 @@ import Header from '../components/header.js';
 import '../styles/ApplyAsTutor.css';
 import Footer from '../components/footer.js';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function ApplyAsTutor() {
     const [formData, setFormData] = useState({
         questionOne: '',
@@ -38,7 +40,7 @@ function ApplyAsTutor() {
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/application', {
+            const response = await fetch(`${API_BASE_URL}/api/application`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

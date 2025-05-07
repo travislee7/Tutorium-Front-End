@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/TutorBuildProfile.css';
 import Header from '../components/header.js';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function TutorBuildProfile() {
     const [formData, setFormData] = useState({
         bio: '',
@@ -79,7 +81,7 @@ function TutorBuildProfile() {
                 formDataToSend.append('profilePic', profilePic);
             }
 
-            const response = await fetch('http://127.0.0.1:8000/api/tutor-profile/', {
+            const response = await fetch(`${API_BASE_URL}/api/tutor-profile/`, {
                 method: 'POST',
                 body: formDataToSend,
             });

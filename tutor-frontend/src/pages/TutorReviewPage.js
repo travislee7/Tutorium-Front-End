@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import '../styles/TutorReviewPage.css';
+
+const API_BASE_URL = process.env.REACT_APP_API_URL;
  
 function TutorReviewPage() {
     const { tutorId } = useParams();
@@ -16,7 +18,7 @@ function TutorReviewPage() {
     useEffect(() => {
         const fetchTutorDetails = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:8000/api/tutor-details/${tutorId}/`);
+                const response = await fetch(`${API_BASE_URL}/api/tutor-details/${tutorId}/`);
                 if (!response.ok) {
                     console.error(`Error fetching tutor details: ${response.status} ${response.statusText}`);
                     return;
@@ -40,7 +42,7 @@ function TutorReviewPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/tutor/${tutorId}/add-review/`, {
+            const response = await fetch(`${API_BASE_URL}/api/tutor/${tutorId}/add-review/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

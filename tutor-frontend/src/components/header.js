@@ -3,6 +3,8 @@ import logo from '../assets/logo.png';
 import '../styles/Header.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function Header({ hideApplyButton = false }) {
     const navigate = useNavigate();
     const location = useLocation();
@@ -29,12 +31,12 @@ function Header({ hideApplyButton = false }) {
             if (userId) {
                 try {
                     // Fetch approve_status
-                    const approveResponse = await fetch(`http://127.0.0.1:8000/api/tutor-approve-status/?user_id=${userId}`);
+                    const approveResponse = await fetch(`${API_BASE_URL}/api/tutor-approve-status/?user_id=${userId}`);
                     const approveData = await approveResponse.json();
                     setApproveStatus(approveData.approve_status);
 
                     // Fetch profile_complete and profile_picture
-                    const profileResponse = await fetch(`http://127.0.0.1:8000/api/tutor-profile-read/?user_id=${userId}`);
+                    const profileResponse = await fetch(`${API_BASE_URL}0/api/tutor-profile-read/?user_id=${userId}`);
                     const profileData = await profileResponse.json();
                     setProfileComplete(profileData.profile_complete);
                     //setProfilePicture(profileData.profile_picture);

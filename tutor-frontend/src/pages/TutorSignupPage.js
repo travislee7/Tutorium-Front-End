@@ -4,6 +4,8 @@ import '../styles/SignupPage.css';
 import Header from '../components/header.js';
 import Footer from '../components/footer.js';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function TutorSignupPage() {
     const [formData, setFormData] = useState({
         firstName: '',
@@ -70,7 +72,7 @@ function TutorSignupPage() {
         try {
             const payload = { ...formData, userType };
 
-            const response = await fetch('http://127.0.0.1:8000/api/signup/', {
+            const response = await fetch(`${API_BASE_URL}/api/signup/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

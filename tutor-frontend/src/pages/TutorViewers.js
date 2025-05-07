@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/header';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 const TutorViewersPage = () => {
     const [viewers, setViewers] = useState([]);
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         if (userId) {
-            fetch(`http://127.0.0.1:8000/api/tutor/${userId}/viewers/`)
+            fetch(`${API_BASE_URL}/api/tutor/${userId}/viewers/`)
                 .then(res => res.json())
                 .then(data => {
                     setViewers(data.viewers || []);

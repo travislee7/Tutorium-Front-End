@@ -11,6 +11,8 @@ import {
 } from 'recharts';
 import { useNavigate } from 'react-router-dom';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 
 const TutorLandingPage = () => {
     const [viewCount, setViewCount] = useState(null);
@@ -25,7 +27,7 @@ const TutorLandingPage = () => {
     useEffect(() => {
         if (userId) {
             // Fetch total view count
-            fetch(`http://127.0.0.1:8000/api/tutor/${userId}/view-count/`)
+            fetch(`${API_BASE_URL}/api/tutor/${userId}/view-count/`)
                 .then((res) => res.json())
                 .then((data) => {
                     setViewCount(data.view_count ?? 0);
@@ -33,7 +35,7 @@ const TutorLandingPage = () => {
                 .catch((err) => console.error('Error fetching view count:', err));
 
 
-            fetch(`http://127.0.0.1:8000/api/tutor/${userId}/request-count/`)
+            fetch(`${API_BASE_URL}/api/tutor/${userId}/request-count/`)
                 .then((res) => res.json())
                 .then((data) => {
                     setRequestCount(data.request_count ?? 0);
@@ -42,7 +44,7 @@ const TutorLandingPage = () => {
                 
                 
             // Fetch view history per day
-            fetch(`http://127.0.0.1:8000/api/tutor/${userId}/view-history/`)
+            fetch(`${API_BASE_URL}/api/tutor/${userId}/view-history/`)
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.history) {

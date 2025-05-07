@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Header from '../components/header';
 import { useNavigate } from 'react-router-dom';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 const TutorRequestsPage = () => {
     const [requests, setRequests] = useState([]);
     const userId = localStorage.getItem('userId');
@@ -9,7 +11,7 @@ const TutorRequestsPage = () => {
 
     useEffect(() => {
         if (userId) {
-            fetch(`http://127.0.0.1:8000/api/tutor/${userId}/request-list/`)
+            fetch(`${API_BASE_URL}/api/tutor/${userId}/request-list/`)
                 .then((res) => res.json())
                 .then((data) => {
                     setRequests(data.requests || []);

@@ -4,6 +4,8 @@ import '../styles/SigninPage.css';
 import Header from '../components/header.js';
 import Footer from '../components/footer.js';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function SigninPage() {
     const [formData, setFormData] = useState({
         email: '',
@@ -30,7 +32,7 @@ function SigninPage() {
     
         try {
             // Step 1: Validate email and password
-            const response = await fetch('http://127.0.0.1:8000/api/signin/', {
+            const response = await fetch(`${API_BASE_URL}/api/signin/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -50,7 +52,7 @@ function SigninPage() {
                 localStorage.setItem('userId', data.user_id);
     
                 // Step 2: Request a 2FA code
-                const codeResponse = await fetch('http://127.0.0.1:8000/api/send-2fa-code/', {
+                const codeResponse = await fetch(`${API_BASE_URL}/api/send-2fa-code/`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

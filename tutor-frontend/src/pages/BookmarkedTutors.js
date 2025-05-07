@@ -4,6 +4,8 @@ import Footer from '../components/footer';
 import '../styles/BookmarksPage.css';
 import { useNavigate } from 'react-router-dom';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function BookmarksPage() {
     const [bookmarkedTutors, setBookmarkedTutors] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -13,7 +15,7 @@ function BookmarksPage() {
     useEffect(() => {
         const fetchBookmarkedTutors = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:8000/api/bookmarked-tutors/', {
+                const response = await fetch(`${API_BASE_URL}/api/bookmarked-tutors/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ studentID }),

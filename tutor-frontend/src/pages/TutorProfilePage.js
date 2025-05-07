@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import '../styles/TutorProfilePage.css';
+
+const API_BASE_URL = process.env.REACT_APP_API_URL;
  
 function TutorProfilePage() {
     const { tutorId } = useParams();
@@ -20,7 +22,7 @@ function TutorProfilePage() {
     useEffect(() => {
         const fetchTutorDetails = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:8000/api/tutor-details/${tutorId}/`);
+                const response = await fetch(`${API_BASE_URL}/api/tutor-details/${tutorId}/`);
                 if (!response.ok) {
                     console.error(`Error fetching tutor details: ${response.status} ${response.statusText}`);
                     return;
@@ -29,7 +31,7 @@ function TutorProfilePage() {
                 setTutor(data);
  
                 // Check bookmark status
-                const bookmarkResponse = await fetch('http://127.0.0.1:8000/api/is-tutor-bookmarked/', {
+                const bookmarkResponse = await fetch(`${API_BASE_URL}/api/is-tutor-bookmarked/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ studentID, tutorID: tutorId }),
@@ -85,8 +87,8 @@ function TutorProfilePage() {
         }
         try {
             const endpoint = isBookmarked
-                ? 'http://127.0.0.1:8000/api/unbookmark-tutor/'
-                : 'http://127.0.0.1:8000/api/bookmark-tutor/';
+                ? `${API_BASE_URL}/api/unbookmark-tutor/`
+                : `${API_BASE_URL}/api/bookmark-tutor/`;
             const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -121,14 +123,14 @@ function TutorProfilePage() {
             studentID,
         };
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/tutor-request-email/', {
+            const response = await fetch(`${API_BASE_URL}/api/tutor-request-email/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestData),
             });
             if (response.ok) {
                 // ALSO send the second request to save request form info
-                const saveInfoResponse = await fetch('http://127.0.0.1:8000/api/save-request-form-info/', {
+                const saveInfoResponse = await fetch(`${API_BASE_URL}/api/save-request-form-info/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({

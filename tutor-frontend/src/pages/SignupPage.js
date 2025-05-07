@@ -4,6 +4,8 @@ import '../styles/SignupPage.css';
 import Header from '../components/header.js';
 import Footer from '../components/footer.js';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function SignupPage() {
     const [formData, setFormData] = useState({
         firstName: '',
@@ -74,7 +76,7 @@ function SignupPage() {
                 mode: 'signup',
             };
     
-            const response = await fetch('http://127.0.0.1:8000/api/initiate-signup/', {
+            const response = await fetch(`${API_BASE_URL}/api/initiate-signup/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

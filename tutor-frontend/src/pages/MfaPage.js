@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/MfaPage.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 function VerifyCodePage() {
     const [email, setEmail] = useState(localStorage.getItem('email') || '');
     const [code, setCode] = useState('');
@@ -18,7 +20,7 @@ function VerifyCodePage() {
     
         console.log('Verifying email:', email, 'with code:', code, 'and mode:', mode);
     
-        const response = await fetch('http://127.0.0.1:8000/api/verify-2fa-code/', {
+        const response = await fetch(`${API_BASE_URL}/api/verify-2fa-code/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -61,6 +61,7 @@ function ApplyAsTutor() {
         }
     };
 
+
     return (
         <div className="apply-as-tutor-page">
             <Header hideApplyButton={true} />
@@ -131,3 +132,5 @@ function ApplyAsTutor() {
 }
 
 export default ApplyAsTutor;
+
+

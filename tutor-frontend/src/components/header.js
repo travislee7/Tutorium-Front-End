@@ -36,7 +36,7 @@ function Header({ hideApplyButton = false }) {
                     setApproveStatus(approveData.approve_status);
 
                     // Fetch profile_complete and profile_picture
-                    const profileResponse = await fetch(`${API_BASE_URL}0/api/tutor-profile-read/?user_id=${userId}`);
+                    const profileResponse = await fetch(`${API_BASE_URL}/api/tutor-profile-read/?user_id=${userId}`);
                     const profileData = await profileResponse.json();
                     setProfileComplete(profileData.profile_complete);
                     //setProfilePicture(profileData.profile_picture);

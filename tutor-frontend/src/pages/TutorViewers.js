@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/header';
+import Footer from '../components/footer';
+import '../styles/TutorViewers.css'
 
 const API_BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -72,6 +74,7 @@ const TutorViewersPage = () => {
                     <p style={{ textAlign: 'center', color: '#777' }}>No views yet.</p>
                 )}
             </div>
+            <Footer className="TutorViewers-footer" />
         </div>
     );
 };

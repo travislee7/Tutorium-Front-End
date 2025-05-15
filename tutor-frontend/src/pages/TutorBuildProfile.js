@@ -11,6 +11,8 @@ function TutorBuildProfile() {
         subjects: [],
         location: [],
         language: [],
+        gender: '',
+        hourly_rate: ''
     });
 
     const [profilePic, setProfilePic] = useState(null);
@@ -77,6 +79,9 @@ function TutorBuildProfile() {
             formDataToSend.append('subjects', formData.subjects.join(','));
             formDataToSend.append('location', formData.location.join(','));
             formDataToSend.append('language', formData.language.join(','));
+            formDataToSend.append('gender', formData.gender);
+            formDataToSend.append('hourly_rate', formData.hourly_rate);
+
             if (profilePic) {
                 formDataToSend.append('profilePic', profilePic);
             }
@@ -124,6 +129,24 @@ function TutorBuildProfile() {
                         onChange={handleFileChange}
                     />
                     {preview && <img src={preview} alt="Profile Preview" className="profile-preview" />}
+
+                    <label>Gender:</label>
+                    <div className="radio-group">
+                        {['Male', 'Female'].map((g) => (
+                            <div key={g}>
+                                <input
+                                    type="radio"
+                                    name="gender"
+                                    value={g}
+                                    checked={formData.gender === g}
+                                    onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                                    required
+                                />
+                                <label>{g}</label>
+                            </div>
+                        ))}
+                    </div>
+
 
                     {/* Bio Input */}
                     <label htmlFor="bio">Bio:</label>
@@ -186,6 +209,19 @@ function TutorBuildProfile() {
                             </div>
                         ))}
                     </div>
+
+                    <label htmlFor="hourlyRate">Hourly Rate ($):</label>
+                    <input
+                        type="number"
+                        id="hourlyRate"
+                        name="hourly_rate"
+                        min="0"
+                        step="1"
+                        placeholder="Enter your rate"
+                        value={formData.hourly_rate}
+                        onChange={(e) => setFormData({ ...formData, hourly_rate: e.target.value })}
+                    />
+
 
                     {/* Submit Button */}
                     <button type="submit">Save Profile</button>

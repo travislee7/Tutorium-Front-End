@@ -1,196 +1,236 @@
-/* Landing Page Styling */
-/* Landing Page Styling */
+/* Import Inter font globally */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--mui-palette-background-default);
+    color: var(--mui-palette-text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .LandingPage {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure it spans the full viewport height */
-    background: linear-gradient(to bottom, #ffffff, #e0fefd, #b3fbf7); /* Ombre effect */
-    background-repeat: no-repeat; /* Prevent tiling */
-    background-size: cover; /* Ensure it covers the container */
+    min-height: 100vh;
+    background: var(--mui-palette-background-default);
 }
- 
- 
- 
-/* Main content (everything above the footer) */
+
 .LandingPage-content {
     flex: 1;
-    /* Fills the remaining space between the header and footer */
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 40px 24px;
+}
+
+.filter-panel {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 32px;
+    padding: 32px;
+    background: var(--mui-palette-background-paper);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: background 0.3s ease;
+}
+
+.MuiGrid-container {
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.MuiGrid-item .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #f4f6f8;
     padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease;
 }
- 
-/* Dropdown container */
-.dropdown-container {
+
+.MuiGrid-item .filter-group:hover {
+    background-color: #eaeff3;
+}
+
+.MuiGrid-item .filter-group h6,
+.MuiGrid-item .filter-group label {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 1rem;
+}
+
+.selected-tags {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+    justify-content: center;
 }
- 
-/* Styling for dropdowns */
-.subject-select,
-.location-select,
-.language-select {
-    margin: 15px 0;
-    width: 100%;
-    /* Full width dropdowns */
-    max-width: 300px;
+
+.tag {
+    background-color: var(--mui-palette-primary-main);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 24px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
- 
-select {
-    padding: 10px;
-    font-size: 16px;
-    width: 100%;
-    text-align: center;
+
+.tag:hover {
+    background-color: var(--mui-palette-primary-dark);
 }
- 
-/* Submit Button */
+
 .submitbutton {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    gap: 16px;
+    margin: 32px 0;
 }
- 
-.submit {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    width: 200px;
-    text-align: center;
-    margin-bottom: 20px;
-    transition: background-color 0.3s ease;
-}
- 
-.submit:hover {
-    background-color: #0056b3;
-}
- 
-/* Divider */
+
 .divider {
-    width: 100%;
-    height: 2px;
-    background-color: #ddd;
-    margin: 20px 0;
+    height: 3px;
+    width: 80%;
+    background: linear-gradient(to right, #7ee8fa, #eec0c6);
+    border-radius: 4px;
+    animation: pulse 4s ease-in-out infinite;
+    margin: 40px auto;
 }
- 
-/* Tutor Cards Container */
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scaleX(1);
+    }
+
+    50% {
+        transform: scaleX(1.05);
+    }
+}
+
 .tutor-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    justify-content: center;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    width: 100%;
+    max-width: 1200px;
 }
- 
-/* Individual Tutor Card Styling */
+
 .tutor-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: var(--mui-palette-background-paper);
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    height: 100%;
 }
- 
+
 .tutor-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
- 
-/* Profile Picture Styling */
+
 .tutor-card-img {
     width: 100%;
-    padding-top: 100%;
-    /* Makes it a square */
+    height: 240px;
+    object-fit: cover;
     background-size: cover;
     background-position: center;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    border-radius: 12px;
+    margin-bottom: 16px;
 }
- 
-/* Tutor Name Styling */
+
 .tutor-card h3 {
-    margin: 10px 0;
-    font-size: 1.2rem;
-    color: #333;
-}
- 
-/* Bubble Labels */
-.bubble-label {
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--mui-palette-text-primary);
     margin-bottom: 8px;
-    color: #007BFF;
-    text-align: left;
 }
- 
-/* Bubble Container */
+
+.bubble-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--mui-palette-primary-main);
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
 .bubble-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 8px;
-    margin-top: 10px;
 }
- 
-/* Individual Bubble Styling */
+
 .bubble {
-    padding: 6px 12px;
-    background-color: #f0f8ff;
-    /* Light user-friendly background */
-    color: #0056b3;
-    /* Darker blue text */
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    text-align: center;
-    border: 1px solid #007BFF;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: #e3f2fd;
+    color: #1976d2;
+    border-radius: 16px;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: background 0.3s;
 }
- 
+
 .bubble:hover {
-    background-color: #007BFF;
+    background-color: #1976d2;
     color: white;
 }
- 
- 
-/* For the star rating display */
+
 .stars {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    margin: 8px 0;
+    margin: 8px 0 16px;
 }
- 
+
 .star {
     position: relative;
-    display: inline-block;
     font-size: 20px;
-    line-height: 1;
-    width: 1em;
     margin-right: 4px;
-    color: #ccc; /* Gray star (empty) */
-    --fill: 0%;  /* By default, no gold fill */
+    color: #ccc;
+    --fill: 0%;
 }
- 
+
 .star::before {
     content: '★';
 }
- 
+
 .star::after {
     content: '★';
     position: absolute;
     top: 0;
     left: 0;
-    width: var(--fill);  /* Fills star according to the --fill custom property */
+    width: var(--fill);
     overflow: hidden;
-    color: #FFD700;       /* Gold color */
+    color: #FFD700;
+}
+
+.tutor-card-info {
+    font-size: 0.9rem;
+    margin-top: 10px;
+    color: var(--mui-palette-text-secondary);
+}
+
+.tutor-card-info p {
+    margin: 2px 0;
+}
+
+@media (max-width: 768px) {
+    .MuiGrid-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .MuiGrid-item {
+        width: 100%;
+    }
+
+    .tutor-cards {
+        grid-template-columns: 1fr;
+    }
 }

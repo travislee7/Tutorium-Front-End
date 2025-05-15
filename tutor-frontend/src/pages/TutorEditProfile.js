@@ -11,6 +11,8 @@ function TutorEditProfile() {
         subjects: [],
         location: [],
         language: [],
+        gender: '',
+        hourly_rate: ''
     });
 
     const [userData, setUserData] = useState({
@@ -42,6 +44,8 @@ function TutorEditProfile() {
                         subjects: profileData.subjects ? profileData.subjects.split(',') : [],
                         location: profileData.location ? profileData.location.split(',') : [],
                         language: profileData.language ? profileData.language.split(',') : [],
+                        gender: profileData.gender || '',
+                        hourly_rate: profileData.hourly_rate || '',
                     });
                     if (profileData.profile_picture) {
                         setPreview(profileData.profile_picture);
@@ -129,6 +133,9 @@ function TutorEditProfile() {
             formDataToSend.append('subjects', formData.subjects.join(','));
             formDataToSend.append('location', formData.location.join(','));
             formDataToSend.append('language', formData.language.join(','));
+            formDataToSend.append('gender', formData.gender);
+            formDataToSend.append('hourly_rate', formData.hourly_rate);
+
 
             // Add new profile picture if selected; else retain the current preview
             if (profilePic) {
@@ -243,6 +250,37 @@ function TutorEditProfile() {
                             <label>{language}</label>
                         </div>
                     ))}
+
+                    {/* Gender Radio Buttons */}
+                    <label>Gender:</label>
+                    <div className="radio-group">
+                        {['Male', 'Female'].map((g) => (
+                            <div key={g}>
+                                <input
+                                    type="radio"
+                                    name="gender"
+                                    value={g}
+                                    checked={formData.gender === g}
+                                    onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                                    required
+                                />
+                                <label>{g}</label>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Hourly Rate Input */}
+                    <label htmlFor="hourlyRate">Hourly Rate ($):</label>
+                    <input
+                        type="number"
+                        id="hourlyRate"
+                        name="hourly_rate"
+                        min="0"
+                        step="1"
+                        placeholder="Enter your rate"
+                        value={formData.hourly_rate}
+                        onChange={(e) => setFormData({ ...formData, hourly_rate: e.target.value })}
+                    />
 
                     <button type="submit">Save Changes</button>
                 </form>

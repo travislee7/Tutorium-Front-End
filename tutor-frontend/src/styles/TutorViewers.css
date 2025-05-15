@@ -1,0 +1,19 @@
+/* Full height layout with sticky footer */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Growable content area */
+.main-content {
+    flex: 1;
+}
+
+/* Optional footer styling */
+.TutorViewers-footer {
+    background-color: #f8f9fa;
+    padding: 20px 10px;
+    text-align: center;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}

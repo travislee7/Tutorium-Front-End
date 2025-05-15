@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@ark-ui/react": "^5.9.1",
+    "@chakra-ui/react": "^3.18.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "framer-motion": "^12.11.3"
+  }
+}

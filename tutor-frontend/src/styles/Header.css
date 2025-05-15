@@ -1,132 +1,69 @@
 /* src/styles/Header.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
 /* Main Header Styling */
 .Header {
     display: flex;
     justify-content: space-between;
-    /* Push buttons to the right */
     align-items: center;
-    padding: 20px;
-    background-color: #99f7e8;
+    padding: 18px 32px;
+    background: linear-gradient(90deg, #b9fbc0, #a0c4ff);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-family: 'Inter', sans-serif;
 }
 
 /* Logo and Title Section */
 .Header-content {
     display: flex;
     align-items: center;
+    gap: 12px;
 }
 
 .Header-logo {
-    height: 50px;
-    /* Adjust size as needed */
-    margin-right: 15px;
+    height: 48px;
+    cursor: pointer;
 }
 
 .Header-title {
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 1.75rem;
+    font-weight: 700;
     color: #333;
-    /* Use your brand color */
-    margin: 0;
+    letter-spacing: 1px;
 }
 
 /* Buttons Container */
 .Header-buttons {
     display: flex;
-    /* Aligns buttons */
-    gap: 0;
-    /* Removes space between buttons */
-    justify-content: flex-end;
+    gap: 8px;
 }
 
-/* Sign In Button Styling */
-.Header-button--signin {
-    padding: 5px 15px;
-    /* Adjust padding for text */
-    font-size: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 1px;
-    background-color: #f0f0f0;
-    color: #333;
-    cursor: pointer;
-    text-align: center;
-    white-space: nowrap;
-    /* Prevents wrapping */
-    width: auto;
-    /* adjusts width */
-    transition: all 0.3s ease;
-    margin: 0;
-}
-
-/* Hover Effect for Sign In */
-.Header-button--signin:hover {
-    background-color: #ddd;
-    border-color: #bbb;
-}
-
-/* Sign Up Button Styling */
-.Header-button--signup {
-    padding: 5px 15px;
-    font-size: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 1px;
-    background-color: #f0f0f0;
-    color: #333;
-    cursor: pointer;
-    text-align: center;
-    /* Centers text */
-    white-space: nowrap;
-    /* Prevent wrapping */
-    width: auto;
-    transition: all 0.3s ease;
-    margin: 0;
-    /* Remove any extra spacing */
-}
-
-/* Hover Effect for Sign Up */
-.Header-button--signup:hover {
-    background-color: #ddd;
-    border-color: #bbb;
-}
-
-/* Styles for Sign In */
-.Header-button--signin {
-    border-right: none;
-}
-
-/* Styles for Sign Up */
-.Header-button--signup {
-    border-left: none;
-}
-
-/*Apply as Tutor button Styling*/
+/* Reusable Button Base */
+.Header-button--signin,
+.Header-button--signup,
 .Header-button--applytutor {
-    padding: 5px 15px;
-    /* Adjust padding for text */
-    font-size: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 1px;
-    background-color: #f0f0f0;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffffffdd;
     color: #333;
     cursor: pointer;
-    text-align: center;
-    white-space: nowrap;
-    /* Prevents wrapping */
-    width: auto;
-    /* adjusts width */
     transition: all 0.3s ease;
-    margin: 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
-/*Hover effect for Apply as Tutor*/
+.Header-button--signin:hover,
+.Header-button--signup:hover,
 .Header-button--applytutor:hover {
-    background-color: #ddd;
-    border-color: #bbb;
-}
-
-/*Styles for Apply as Tutor*/
-.Header-button--applytutor {
-    border-right: none;
+    background-color: #f1f1f1;
+    transform: translateY(-1px);
 }
 
 /* Dropdown Menu */
@@ -136,23 +73,24 @@
     right: 0;
     background: white;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
     list-style: none;
     padding: 0;
     margin: 0;
-    z-index: 1000;
+    z-index: 2000;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .Dropdown-item {
-    padding: 10px 20px;
-    font-size: 14px;
+    padding: 12px 18px;
+    font-size: 0.875rem;
     color: #333;
     cursor: pointer;
-    text-align: left;
+    transition: background-color 0.2s ease;
 }
 
 .Dropdown-item:hover {
-    background: #f0f0f0;
+    background-color: #f7f7f7;
 }
 
 /* User Info Section */
@@ -160,43 +98,52 @@
     position: relative;
     display: flex;
     align-items: center;
+    gap: 16px;
 }
 
-/* User Icon Circle */
+/* User Icon */
 .User-icon {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     background-color: #007bff;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 1rem;
+    font-weight: 600;
     text-transform: uppercase;
     border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .User-icon:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }
 
 /* Mobile Adjustments */
 @media (max-width: 768px) {
+    .Header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
     .Header-title {
         font-size: 1.5rem;
     }
 
-    .User-icon {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
+    .Header-buttons {
+        width: 100%;
+        justify-content: flex-end;
+        gap: 4px;
     }
 
-    .Dropdown-item {
-        padding: 8px 15px;
-        font-size: 12px;
+    .User-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
     }
 }

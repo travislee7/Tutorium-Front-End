@@ -1,151 +1,49 @@
-/* src/styles/TutorBuildProfile.css */
-
-/* Full page container with header and centered form */
-.tutor-profile-page {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background: linear-gradient(to top, #b5f7f3, #d5f7f5, #fcfcfc); /* Ombre background */
-    
-}
-
-/* Center the form container */
-.form-container {
-    flex-grow: 1; /* Allow it to take remaining space */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center horizontally */
-    justify-content: center; /* Center vertically */
-    padding: 20px;
-    text-align: center;
-}
-
-/* Styling for the form */
-#tutor-profile-form {
+/* Bio textarea - cleaner and wider */
+#tutor-profile-form textarea {
     width: 100%;
-    max-width: 400px;
-    background: #ffffff;
-    padding: 20px;
+    min-height: 80px;
+    padding: 12px 14px;
+    font-size: 15px;
+    border: none; /* Removed border */
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f5f5f5; /* Soft background for modern look */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle inset shadow */
+    resize: vertical;
+    transition: background-color 0.3s ease;
+}
+
+#tutor-profile-form textarea:focus {
+    background-color: #fff;
+    outline: 2px solid #28a745; /* Green focus ring */
+}
+#tutor-profile-form textarea::placeholder {
+    color: #666; /* Darker gray for better visibility */
+    font-weight: 500;
+    font-size: 15px;
+    opacity: 1; /* Ensure it’s fully visible */
+}
+/* Centered layout for image upload and gender */
+.centered-group {
     display: flex;
     flex-direction: column;
-    gap: 15px;
     align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .radio-group {
+    display: flex;
+    gap: 20px;
     justify-content: center;
-}
-
-/* Labels */
-#tutor-profile-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: hsl(0, 0%, 33%);
-    align-self: flex-start;
-}
-
-/* Input Fields */
-#tutor-profile-form input[type="text"],
-#tutor-profile-form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
-/* Textarea Specific Styles */
-#tutor-profile-form textarea {
-    resize: vertical; /* Allow vertical resizing */
-    min-height: 100px; /* Set minimum height */
-}
-
-/* Profile Picture Preview */
-.profile-preview {
-    width: 120px;
-    height: 120px;
+    margin-top: 10px;
+  }
+  
+  /* Optional: Add spacing and sizing for profile preview */
+  .profile-preview {
+    margin-top: 12px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
-    margin-top: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Save Profile Button */
-#tutor-profile-form button {
-    width: auto;
-    padding: 12px 100px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    text-align: center;
-    margin: 40px auto 0 auto;
-    display: block;
-}
-
-#tutor-profile-form button:hover {
-    background-color: #218838;
-}
-
-#tutor-profile-form button:active {
-    transform: scale(0.98);
-}
-
-/* Error Popup */
-.error-popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.error-popup-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.error-popup-content p {
-    margin-bottom: 20px;
-    color: red;
-    font-weight: bold;
-}
-
-.error-popup-content button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.error-popup-content button:hover {
-    background-color: #0056b3;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 500px) {
-    .tutor-profile-page {
-        padding: 15px;
-    }
-
-    #tutor-profile-form {
-        padding: 15px;
-    }
-
-    #tutor-profile-form textarea {
-        min-height: 80px;
-    }
-}
+    border: 2px solid #ccc;
+  }
+  

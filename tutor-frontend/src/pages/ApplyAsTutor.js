@@ -1,8 +1,144 @@
+// import React, { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import Header from '../components/header.js';
+// import '../styles/ApplyAsTutor.css';
+// import Footer from '../components/footer.js';
+
+// const API_BASE_URL = process.env.REACT_APP_API_URL;
+
+// function ApplyAsTutor() {
+//     const [formData, setFormData] = useState({
+//         questionOne: '',
+//         questionTwo: '',
+//     });
+//     const navigate = useNavigate();
+
+//     const handleChange = (e) => {
+//         setFormData({
+//             ...formData,
+//             [e.target.name]: e.target.value,
+//         });
+//     };
+
+//     const handleSubmit = async (e) => {
+//         e.preventDefault();
+
+//         if (formData.questionOne.trim().length < 50 || formData.questionTwo.trim().length < 50) {
+//             alert("Each response must be at least 50 characters long.");
+//             return;
+//         }
+
+//         const email = localStorage.getItem('email');
+//         if (!email) {
+//             alert('Email not found in localStorage.');
+//             return;
+//         }
+
+//         const payload = {
+//             ...formData,
+//             email,
+//         };
+
+//         try {
+//             const response = await fetch(`${API_BASE_URL}/api/application`, {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                 },
+//                 body: JSON.stringify(payload),
+//             });
+
+//             if (response.ok) {
+//                 // Redirect to confirmation page on success
+//                 navigate('/tutor-request-received');
+//             } else {
+//                 const errorData = await response.json();
+//                 alert(`Error: ${errorData.error || 'Unknown error occurred.'}`);
+//             }
+//         } catch (error) {
+//             console.error('Error:', error);
+//             alert('There was an error connecting to the server.');
+//         }
+//     };
+
+
+//     return (
+//         <div className="apply-as-tutor-page">
+//             <Header hideApplyButton={true} />
+    
+//             {/* Page Heading */}
+//             <div className="apply-page">
+//                 <p className="page-heading">Welcome to the Apply as a Tutor Page!</p>
+    
+//                 {/* Main Content (Two Columns) */}
+//                 <div className="apply-content">
+//                     {/* Left Text Section */}
+//                     <div className="benefits-section">
+//                         <p>Meet with your preferred student anywhere anytime within Washington state.</p>
+//                         <p>Select your student and save time by easily fitting sessions into your schedule.</p>
+//                         <p>No subscriptions. Get Paid, Hassle-free. Affordable options. Only pay for the time you need.</p>
+//                     </div>
+    
+//                     {/* Right Form Section */}
+//                     <div className="apply-content-container">
+//                         <p>Fill out the following questions:</p>
+//                         <form onSubmit={handleSubmit}>
+//                             <div className="form-group">
+//                                 <label htmlFor="questionOne">
+//                                     Why do you think you can be a tutor? <br /> List your school and experience:
+//                                 </label>
+//                                 <textarea
+//                                     id="questionOne"
+//                                     name="questionOne"
+//                                     value={formData.questionOne}
+//                                     onChange={handleChange}
+//                                     placeholder="Minimum 50 characters"
+//                                     rows="10"
+//                                     required
+//                                 />
+//                                 <p className="character-count">
+//                                     {formData.questionOne.trim().length}/2000 characters
+//                                 </p>
+//                             </div>
+//                             <div className="form-group">
+//                                 <label htmlFor="questionTwo">
+//                                     List Your Qualifications <br /> Have you ever worked with a different tutoring app?
+//                                 </label>
+//                                 <textarea
+//                                     id="questionTwo"
+//                                     name="questionTwo"
+//                                     value={formData.questionTwo}
+//                                     onChange={handleChange}
+//                                     placeholder="Minimum 50 characters"
+//                                     rows="10"
+//                                     required
+//                                 />
+//                                 <p className="character-count">
+//                                     {formData.questionTwo.trim().length}/2000 characters
+//                                 </p>
+//                             </div>
+//                             <button type="submit" className="submit-button">Submit</button>
+//                         </form>
+//                     </div>
+//                 </div>
+//             </div>
+    
+//             <Footer />
+//         </div>
+//     );
+    
+    
+    
+// }
+
+// export default ApplyAsTutor;
+
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/header.js';
-import '../styles/ApplyAsTutor.css';
 import Footer from '../components/footer.js';
+import { Box, Container, Typography, TextField, Button, Paper } from '@mui/material';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -34,10 +170,7 @@ function ApplyAsTutor() {
             return;
         }
 
-        const payload = {
-            ...formData,
-            email,
-        };
+        const payload = { ...formData, email };
 
         try {
             const response = await fetch(`${API_BASE_URL}/api/application`, {
@@ -49,7 +182,6 @@ function ApplyAsTutor() {
             });
 
             if (response.ok) {
-                // Redirect to confirmation page on success
                 navigate('/tutor-request-received');
             } else {
                 const errorData = await response.json();
@@ -61,74 +193,90 @@ function ApplyAsTutor() {
         }
     };
 
-
     return (
-        <div className="apply-as-tutor-page">
+        <Box sx={{ background: 'linear-gradient(to top, #b5f7f3, #d5f7f5, #fcfcfc)', minHeight: '100vh' }}>
             <Header hideApplyButton={true} />
-    
-            {/* Page Heading */}
-            <div className="apply-page">
-                <p className="page-heading">Welcome to the Apply as a Tutor Page!</p>
-    
-                {/* Main Content (Two Columns) */}
-                <div className="apply-content">
-                    {/* Left Text Section */}
-                    <div className="benefits-section">
-                        <p>Meet with your preferred student anywhere anytime within Washington state.</p>
-                        <p>Select your student and save time by easily fitting sessions into your schedule.</p>
-                        <p>No subscriptions. Get Paid, Hassle-free. Affordable options. Only pay for the time you need.</p>
-                    </div>
-    
-                    {/* Right Form Section */}
-                    <div className="apply-content-container">
-                        <p>Fill out the following questions:</p>
+
+            <Container sx={{ pt: 6, pb: 10 }}>
+                <Typography variant="h4" fontWeight="bold" align="center" color="primary.dark" mb={6}>
+                    Welcome to the Apply as a Tutor Page!
+                </Typography>
+
+                <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} gap={4}>
+                    {/* Benefits Section */}
+                    <Box flex={1} maxWidth={{ md: '45%' }}>
+                        <Typography variant="h6" fontWeight="bold" color="text.primary" gutterBottom>
+                            Meet with your preferred student anywhere anytime within Washington state.
+                        </Typography>
+                        <Typography variant="h6" fontWeight="bold" color="text.primary" gutterBottom>
+                            Select your student and save time by easily fitting sessions into your schedule.
+                        </Typography>
+                        <Typography variant="h6" fontWeight="bold" color="text.primary">
+                            No subscriptions. Get Paid, Hassle-free. Affordable options. Only pay for the time you need.
+                        </Typography>
+                    </Box>
+
+                    {/* Form Section */}
+                    <Paper elevation={4} sx={{ flex: 1, p: 6, borderRadius: 3 }}>
+                        <Typography variant="h6" fontWeight="bold" color="primary.main" mb={3}>
+                            Fill out the following questions:
+                        </Typography>
                         <form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="questionOne">
-                                    Why do you think you can be a tutor? <br /> List your school and experience:
-                                </label>
-                                <textarea
-                                    id="questionOne"
+                            <Box mb={4}>
+                                <Typography variant="body1" fontWeight="bold" mb={1}>
+                                    Why do you think you can be a tutor? List your school and experience:
+                                </Typography>
+                                <TextField
+                                    multiline
+                                    minRows={6}
+                                    fullWidth
                                     name="questionOne"
                                     value={formData.questionOne}
                                     onChange={handleChange}
                                     placeholder="Minimum 50 characters"
-                                    rows="10"
-                                    required
+                                    variant="outlined"
                                 />
-                                <p className="character-count">
+                                <Typography variant="caption" color="text.secondary">
                                     {formData.questionOne.trim().length}/2000 characters
-                                </p>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="questionTwo">
-                                    List Your Qualifications <br /> Have you ever worked with a different tutoring app?
-                                </label>
-                                <textarea
-                                    id="questionTwo"
+                                </Typography>
+                            </Box>
+
+                            <Box mb={4}>
+                                <Typography variant="body1" fontWeight="bold" mb={1}>
+                                    List Your Qualifications. Have you ever worked with a different tutoring app?
+                                </Typography>
+                                <TextField
+                                    multiline
+                                    minRows={6}
+                                    fullWidth
                                     name="questionTwo"
                                     value={formData.questionTwo}
                                     onChange={handleChange}
                                     placeholder="Minimum 50 characters"
-                                    rows="10"
-                                    required
+                                    variant="outlined"
                                 />
-                                <p className="character-count">
+                                <Typography variant="caption" color="text.secondary">
                                     {formData.questionTwo.trim().length}/2000 characters
-                                </p>
-                            </div>
-                            <button type="submit" className="submit-button">Submit</button>
+                                </Typography>
+                            </Box>
+
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                type="submit"
+                                size="large"
+                                sx={{ mt: 2 }}
+                            >
+                                Submit
+                            </Button>
                         </form>
-                    </div>
-                </div>
-            </div>
-    
+                    </Paper>
+                </Box>
+            </Container>
+
             <Footer />
-        </div>
+        </Box>
     );
-    
-    
-    
 }
 
 export default ApplyAsTutor;

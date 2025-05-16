@@ -1,4 +1,4 @@
-.BookmarksPage {
+/* .BookmarksPage {
     padding: 20px;
 }
 
@@ -59,4 +59,14 @@
     background-size: cover;
     background-position: center;
     border-radius: 8px 8px 0 0;
-}
+} */
+
+/* BookmarksPage.css */
+.MuiPaper-root {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .MuiPaper-root:hover {
+    transform: translateY(-5px);
+  }
+  

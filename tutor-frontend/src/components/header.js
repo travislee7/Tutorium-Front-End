@@ -338,7 +338,7 @@ fetchStatuses();
 }, [userId]);
 
 const handleLogoClick = () => {
-const tutorPages = ['/tutor-edit-profile', '/tutor-build-profile', '/tutor-landing', '/tutor-viewers'];
+const tutorPages = ['/tutor-edit-profile', '/tutor-build-profile', '/tutor-landing', '/tutor-viewers', '/tutor-requests'];
 if (tutorPages.includes(location.pathname)) navigate('/tutor-landing');
 else navigate('/');
 };

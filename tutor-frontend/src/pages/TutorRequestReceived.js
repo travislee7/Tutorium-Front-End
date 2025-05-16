@@ -1,38 +1,50 @@
 import React from 'react';
-import Header from '../components/header'; // Import the Header component
+import Header from '../components/header';
 import Footer from '../components/footer';
-import '../styles/TutorRequestReceived.css'; // Adjust path if needed
-
-// function TutorRequestReceived() {
-//     return (
-//         <>
-//             {/* Pass `hideApplyButton` as true to hide the "Apply as a Tutor" button */}
-//             <Header hideApplyButton={true} />
-//             <div className="tutor-request-received-page">
-//                 <h1>We have received your request to become a tutor and sent you a confirmation email.</h1>
-//                 <p>Please wait while we approve your request.</p>
-//                 <Footer className="TutorRequestReceived-footer" />
-//             </div>
-//         </>
-
-//     );
-// }
-
-
-// export default TutorRequestReceived;
-
+import { Container, Typography, Box, Paper } from '@mui/material';
 
 function TutorRequestReceived() {
-    return (
-        <div className="page-container">
-            <Header hideApplyButton={true} />
-            <div className="tutor-request-received-page">
-                <h1>We have received your request to become a tutor and sent you a confirmation email.</h1>
-                <p>Please wait while we approve your request.</p>
-            </div>
-            <Footer className="TutorRequestReceived-footer" />
-        </div>
-    );
+  return (
+    <Box
+      display="flex"
+      flexDirection="column"
+      minHeight="100vh"
+      sx={{
+        bgcolor: 'transparent',
+        background: 'linear-gradient(to top, #b5f7f3, #d5f7f5, #fcfcfc)', // Same gradient as ApplyAsTutor
+        fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', // Match your theme font
+      }}
+    >
+      <Header hideApplyButton={true} />
+      <Container
+        component={Paper}
+        elevation={3}
+        sx={{
+          flex: 1,
+          mt: 8,
+          mb: 4,
+          p: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+          borderRadius: 2,
+          bgcolor: 'background.paper',
+          fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+        }}
+        maxWidth="sm"
+      >
+        <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ color: '#191938' }}>
+          We have received your request to become a tutor and sent you a confirmation email.
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ color: '#191938' }}>
+          Please wait while we approve your request.
+        </Typography>
+      </Container>
+      <Footer />
+    </Box>
+  );
 }
 
 export default TutorRequestReceived;

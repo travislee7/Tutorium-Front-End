@@ -4,146 +4,146 @@
 
 /* Main Header Styling */
 .Header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 32px;
-    background: linear-gradient(90deg, #b9fbc0, #a0c4ff);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    font-family: 'Inter', sans-serif;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 18px 32px;
+background: linear-gradient(90deg, #b9fbc0, #a0c4ff);
+backdrop-filter: blur(10px);
+box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+position: sticky;
+top: 0;
+z-index: 1000;
+font-family: 'Inter', sans-serif;
 }
 
 /* Logo and Title Section */
 .Header-content {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+display: flex;
+align-items: center;
+gap: 12px;
 }
 
 .Header-logo {
-    height: 48px;
-    cursor: pointer;
+height: 48px;
+cursor: pointer;
 }
 
 .Header-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #333;
-    letter-spacing: 1px;
+font-size: 1.75rem;
+font-weight: 700;
+color: #333;
+letter-spacing: 1px;
 }
 
 /* Buttons Container */
 .Header-buttons {
-    display: flex;
-    gap: 8px;
+display: flex;
+gap: 8px;
 }
 
 /* Reusable Button Base */
 .Header-button--signin,
 .Header-button--signup,
 .Header-button--applytutor {
-    padding: 6px 14px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 8px;
-    background-color: #ffffffdd;
-    color: #333;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+padding: 6px 14px;
+font-size: 0.8rem;
+font-weight: 500;
+border: none;
+border-radius: 8px;
+background-color: #ffffffdd;
+color: #333;
+cursor: pointer;
+transition: all 0.3s ease;
+box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
 .Header-button--signin:hover,
 .Header-button--signup:hover,
 .Header-button--applytutor:hover {
-    background-color: #f1f1f1;
-    transform: translateY(-1px);
+background-color: #f1f1f1;
+transform: translateY(-1px);
 }
 
 /* Dropdown Menu */
 .Dropdown-menu {
-    position: absolute;
-    top: 60px;
-    right: 0;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    z-index: 2000;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+position: absolute;
+top: 60px;
+right: 0;
+background: white;
+border: 1px solid #ccc;
+border-radius: 8px;
+list-style: none;
+padding: 0;
+margin: 0;
+z-index: 2000;
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .Dropdown-item {
-    padding: 12px 18px;
-    font-size: 0.875rem;
-    color: #333;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+padding: 12px 18px;
+font-size: 0.875rem;
+color: #333;
+cursor: pointer;
+transition: background-color 0.2s ease;
 }
 
 .Dropdown-item:hover {
-    background-color: #f7f7f7;
+background-color: #f7f7f7;
 }
 
 /* User Info Section */
 .User-info {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+position: relative;
+display: flex;
+align-items: center;
+gap: 16px;
 }
 
 /* User Icon */
 .User-icon {
-    width: 42px;
-    height: 42px;
-    background-color: #007bff;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+width: 42px;
+height: 42px;
+background-color: #007bff;
+color: white;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 1rem;
+font-weight: 600;
+text-transform: uppercase;
+border-radius: 50%;
+cursor: pointer;
+transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .User-icon:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
+background-color: #0056b3;
+transform: scale(1.05);
 }
 
 /* Mobile Adjustments */
 @media (max-width: 768px) {
-    .Header {
-        flex-direction: column;
-        gap: 12px;
-        align-items: flex-start;
-    }
+.Header {
+flex-direction: column;
+gap: 12px;
+align-items: flex-start;
+}
 
-    .Header-title {
-        font-size: 1.5rem;
-    }
+.Header-title {
+font-size: 1.5rem;
+}
 
-    .Header-buttons {
-        width: 100%;
-        justify-content: flex-end;
-        gap: 4px;
-    }
+.Header-buttons {
+width: 100%;
+justify-content: flex-end;
+gap: 4px;
+}
 
-    .User-icon {
-        width: 36px;
-        height: 36px;
-        font-size: 0.9rem;
-    }
+.User-icon {
+width: 36px;
+height: 36px;
+font-size: 0.9rem;
+}
 }

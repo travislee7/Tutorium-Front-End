@@ -1,65 +1,76 @@
 /* src/styles/SignInPage.css */
 /* Footer Styling */
 .SigninPage-footer {
-    width: 100%; /* Ensure it spans the full width */
-    position: relative; /* Separate it from the rest of the layout */
-    background-color: #f8f9fa; /* Light gray background */
-    padding: 20px 10px; /* Add padding for spacing */
-    text-align: center; /* Center text inside */
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Optional: Shadow for better separation */
-}
-
-/* Footer Text Styling */
-.SigninPage-footer p {
+    width: 100%;
+    /* Ensure it spans the full width */
+    position: relative;
+    /* Separate it from the rest of the layout */
+    background-color: #f8f9fa;
+    /* Light gray background */
+    padding: 20px 10px;
+    /* Add padding for spacing */
+    text-align: center;
+    /* Center text inside */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    /* Optional: Shadow for better separation */
+    }
+    
+    /* Footer Text Styling */
+    .SigninPage-footer p {
     margin: 0;
     font-size: 14px;
     color: hsl(0, 0%, 33%);
-}
-
-/* Footer Links Styling */
-.SigninPage-footer a {
+    }
+    
+    /* Footer Links Styling */
+    .SigninPage-footer a {
     color: #007bff;
     text-decoration: none;
     font-weight: bold;
-}
-
-.SigninPage-footer a:hover {
+    }
+    
+    .SigninPage-footer a:hover {
     text-decoration: underline;
-}
-
-.sign-in-page {
+    }
+    
+    .sign-in-page {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: linear-gradient(to top, #b5f7f3, #d5f7f5, #fcfcfc);/* Ensure it takes the full height of the viewport */
-}
-
-.sign-in-content {
-    flex: 1; /* Allow content to grow and push footer to the bottom */
+    background: linear-gradient(to top, #b5f7f3, #d5f7f5, #fcfcfc);
+    /* Ensure it takes the full height of the viewport */
+    }
+    
+    .sign-in-content {
+    flex: 1;
+    /* Allow content to grow and push footer to the bottom */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the content */
+    align-items: center;
+    /* Center the content */
     justify-content: center;
-}
-
-header {
+    }
+    
+    header {
     width: 100%;
-    position: relative; /* Keep the header flow unaffected */
-    background-color: #fff; /* Add any styles specific to the header */
+    position: relative;
+    /* Keep the header flow unaffected */
+    background-color: #fff;
+    /* Add any styles specific to the header */
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.form-container {
+    }
+    
+    .form-container {
     text-align: center;
     padding: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-#sign-in-form {
+    }
+    
+    #sign-in-form {
     width: 100%;
     max-width: 400px;
     background: #ffffff;
@@ -71,26 +82,26 @@ header {
     gap: 15px;
     align-items: center;
     justify-content: center;
-}
-
-#sign-in-form label {
+    }
+    
+    #sign-in-form label {
     font-weight: bold;
     margin-bottom: 5px;
     color: hsl(0, 0%, 33%);
     align-self: flex-start;
-}
-
-#sign-in-form input[type="email"],
-#sign-in-form input[type="password"] {
+    }
+    
+    #sign-in-form input[type="email"],
+    #sign-in-form input[type="password"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
     box-sizing: border-box;
-}
-
-#sign-in-form button {
+    }
+    
+    #sign-in-form button {
     width: auto;
     padding: 12px 130px;
     background-color: #007BFF;
@@ -103,62 +114,63 @@ header {
     text-align: center;
     margin: 20px auto 0 auto;
     display: block;
-}
-
-#sign-in-form button:hover {
+    }
+    
+    #sign-in-form button:hover {
     background-color: #0056b3;
-}
-
-#sign-in-form button:active {
+    }
+    
+    #sign-in-form button:active {
     transform: scale(0.98);
-}
-
-.error-popup {
+    }
+    
+    .error-popup {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
-
-.error-popup-content {
+    }
+    
+    .error-popup-content {
     background: white;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.error-popup-content p {
+    }
+    
+    .error-popup-content p {
     margin-bottom: 20px;
     color: red;
     font-weight: bold;
-}
-
-.error-popup-content button {
+    }
+    
+    .error-popup-content button {
     background-color: #007bff;
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
-}
-
-.error-popup-content button:hover {
+    }
+    
+    .error-popup-content button:hover {
     background-color: #0056b3;
-}
-
-@media (max-width: 500px) {
+    }
+    
+    @media (max-width: 500px) {
     .sign-in-page {
-        padding: 15px;
+    padding: 15px;
     }
-
+    
     #sign-in-form {
-        padding: 15px;
+    padding: 15px;
     }
-}
+    }

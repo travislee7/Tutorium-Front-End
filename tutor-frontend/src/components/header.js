@@ -82,9 +82,31 @@ const initials = firstName && lastName ? `${firstName[0].toUpperCase()}${lastNam
 return (
 <AppBar position="static" color="inherit" elevation={1}>
 <Toolbar sx={{ justifyContent: 'space-between' }}>
-<Box display="flex" alignItems="center" sx={{ cursor: 'pointer' }} onClick={handleLogoClick}>
+<Box display="flex" gap={1} alignItems="center" sx={{ cursor: 'pointer' }} onClick={handleLogoClick}>
 <img src={logo} alt="Tutorium Logo" style={{ height: 40, marginRight: 12 }} />
 <Typography variant="h6" sx={{ fontWeight: 600, color: 'primary.main' }}>Tutorium</Typography>
+{!['/', '/tutor-landing'].includes(location.pathname) && (
+    <Button
+        variant="outlined"
+        color="primary"
+        size="large"
+        onClick={() => navigate('/')}
+        sx={{
+            minWidth: 180,
+            height: 30,
+            lineHeight: 1.75,
+            fontSize: '0.875rem',
+            padding: '6px 16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxSizing: 'border-box',
+            borderWidth: 2,
+        }}
+    >
+        Back to Home
+    </Button>
+)}
 </Box>
 
 {isLoggedIn ? (

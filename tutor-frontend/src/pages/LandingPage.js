@@ -340,9 +340,23 @@ setTutors([]);
 setHasSearched(false);
 };
 
+// const renderStars = (rating = 0) => {
+// return Array.from({ length: 5 }, (_, i) => rating >= i + 1 ? 100 : rating > i ? (rating - i) * 100 : 0);
+// };
+
 const renderStars = (rating = 0) => {
-return Array.from({ length: 5 }, (_, i) => rating >= i + 1 ? 100 : rating > i ? (rating - i) * 100 : 0);
-};
+    return Array.from({ length: 5 }, (_, i) => {
+      const starValue = Math.min(Math.max(rating - i, 0), 1);  // Ensures a value between 0 and 1
+      return Math.round(starValue * 100); // Convert to percentage (0 to 100)
+    });
+  };
+  
+  
+  
+
+
+
+  
 
 return (
 <ThemeProvider theme={theme}>
@@ -469,11 +483,60 @@ sx={{ backgroundImage: `url(${tutor.profile_picture})`, height: 200, backgroundS
 />
 <CardContent>
 <Typography variant="h6">{`${tutor.user__first_name} ${tutor.user__last_name}`}</Typography>
-<Box className="stars">
+{/* <Box className="stars">
 {renderStars(tutor.average_rating).map((fill, idx) => (
 <span key={idx} className="star" style={{ '--fill': `${fill}%` }}></span>
 ))}
+</Box> */}
+
+<Box 
+  className="stars" 
+  sx={{ 
+    display: 'flex', 
+    alignItems: 'center', 
+    gap: 0.5, 
+    padding: '5px 0' 
+  }}
+>
+  {renderStars(Number(tutor.average_rating) || 0).map((fill, idx) => (
+    <Box 
+      key={idx} 
+      sx={{
+        position: 'relative',
+        display: 'inline-block',
+        width: '24px',
+        height: '24px',
+        fontSize: '24px',
+        lineHeight: '24px',
+        color: '#ddd',
+        clipPath: 'inset(0% 0% 0% 0%)',
+      }}
+    >
+      <span 
+        style={{ 
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          color: '#FFD700',
+          clipPath: `inset(0% ${100 - fill}% 0% 0%)`
+        }}
+      >
+        ★
+      </span>
+      <span>★</span>
+    </Box>
+  ))}
+  <Typography 
+    variant="body2" 
+    sx={{ ml: 1, color: '#555', fontSize: '16px', whiteSpace: 'nowrap' }}
+  >
+    {Number(tutor.average_rating).toFixed(2)}
+  </Typography>
 </Box>
+
+
+
+
 <Typography className="bubble-label">Subjects:</Typography>
 <Box className="bubble-container">
 {tutor.subjects.split(',').map((s, i) => <span key={i} className="bubble">{s.trim()}</span>)}

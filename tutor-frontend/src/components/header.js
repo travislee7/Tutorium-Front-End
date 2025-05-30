@@ -140,6 +140,7 @@ sx={{ bgcolor: profileComplete !== 'yes' || location.pathname === '/' ? 'grey.50
   : null}
 
 
+
 </Avatar>
 </IconButton>
 </Tooltip>
